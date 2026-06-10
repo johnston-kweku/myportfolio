@@ -36,4 +36,33 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Contact Form Logic
+    const contactForm = document.querySelector('form[name="contact"]');
+    const formMessage = document.getElementById('form-message');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(contactForm);
+            
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                formMessage.textContent = 'Message sent successfully! I will get back to you soon.';
+                formMessage.classList.remove('hidden', 'bg-red-100', 'text-red-700');
+                formMessage.classList.add('bg-green-100', 'text-green-700');
+                contactForm.reset();
+            })
+            .catch((error) => {
+                formMessage.textContent = 'Oops! Something went wrong. Please try again.';
+                formMessage.classList.remove('hidden', 'bg-green-100', 'text-green-700');
+                formMessage.classList.add('bg-red-100', 'text-red-700');
+            });
+        });
+    }
 });
