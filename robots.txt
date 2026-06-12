@@ -1,0 +1,6 @@
+# User-agent: * applies to all search engine bots (Google, Bing, DuckDuckGo)
+User-agent: *
+Allow: /
+
+# Directs search bots to your primary index map
+Sitemap: https://netlify.app
