@@ -80,6 +80,19 @@
             overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
+        /* CRITICAL: Light text for dark terminal background */
+        .code-window pre,
+        .code-window code,
+        .code-window .terminal-text {
+            color: #abb2bf;
+        }
+        .code-window .term-keyword { color: #c678dd; }
+        .code-window .term-class { color: #e5c07b; }
+        .code-window .term-method { color: #61afef; }
+        .code-window .term-self { color: #e06c75; }
+        .code-window .term-string { color: #98c379; }
+        .code-window .term-comment { color: #5c6370; font-style: italic; }
+        .code-window .term-label { color: #5c6370; }
 
         .nav-link {
             position: relative;
@@ -111,6 +124,18 @@
             border-radius: 2px;
             transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        /* Mobile-safe code window */
+        .code-window pre {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        @media (max-width: 640px) {
+            .code-window pre {
+                font-size: 0.75rem;
+                padding: 1rem;
+            }
+        }
     </style>
     <noscript>
         <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
@@ -121,7 +146,7 @@
 
     <!-- Navigation -->
     <nav class="w-full fixed top-0 z-50 left-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <a href="index.html" class="text-slate-900 font-mono font-bold text-xl tracking-tighter hover:scale-105 transition-transform">
                 <span class="text-blue-600">[</span>JA<span class="text-blue-600">]</span>
             </a>
@@ -158,7 +183,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+    <section class="pt-28 sm:pt-32 pb-20 px-4 sm:px-6 relative overflow-hidden">
         <div class="absolute inset-0 bg-linear-to-br from-blue-50 via-white to-violet-50 -z-10"></div>
         <div class="absolute top-20 right-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl -z-10"></div>
         <div class="absolute bottom-0 left-0 w-72 h-72 bg-violet-200/30 rounded-full blur-3xl -z-10"></div>
@@ -170,7 +195,7 @@
                     OPEN FOR PROJECTS & INTERNSHIPS
                 </div>
 
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
                     Architecting <span class="gradient-text">Scalable</span> Backends with Django & Python
                 </h1>
 
@@ -209,28 +234,27 @@
                         <span class="w-3 h-3 rounded-full bg-green-500"></span>
                         <span class="ml-4 text-slate-400 text-xs font-mono">system_optimizer.py</span>
                     </div>
-                    <div class="p-6 font-mono text-sm leading-relaxed">
-                        <div class="text-slate-400 mb-2"># Resilient Distributed System</div>
-                        <div><span class="text-purple-400">class</span> <span class="text-yellow-300">SystemOptimizer</span>:</div>
-                        <div class="pl-4"><span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(<span class="text-orange-300">self</span>, <span class="text-blue-300">node</span>):</div>
-                        <div class="pl-8"><span class="text-orange-300">self</span>.node = node</div>
-                        <div class="pl-8"><span class="text-orange-300">self</span>.status = <span class="text-green-400">"ACTIVE"</span></div>
-                        <div class="pl-8"><span class="text-orange-300">self</span>.latency = <span class="text-green-400">"24ms"</span></div>
-                        <div class="pl-4 mt-2"><span class="text-purple-400">def</span> <span class="text-blue-400">scale_cluster</span>(<span class="text-orange-300">self</span>):</div>
-                        <div class="pl-8"><span class="text-purple-400">return</span> [n <span class="text-purple-400">for</span> n <span class="text-purple-400">in</span> <span class="text-orange-300">self</span>.node <span class="text-purple-400">if</span> n.ready]</div>
-                        <div class="mt-4 flex gap-4">
-                            <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
-                                <div class="text-slate-400 text-xs">Uptime</div>
-                                <div class="text-green-400 font-bold">99.9%</div>
-                            </div>
-                            <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
-                                <div class="text-slate-400 text-xs">Auth</div>
-                                <div class="text-blue-400 font-bold">RBAC</div>
-                            </div>
-                            <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
-                                <div class="text-slate-400 text-xs">Scale</div>
-                                <div class="text-violet-400 font-bold">10x</div>
-                            </div>
+                    <pre class="p-6 font-mono text-sm leading-relaxed"><code><span class="term-comment"># Resilient Distributed System</span>
+<span class="term-keyword">class</span> <span class="term-class">SystemOptimizer</span>:
+    <span class="term-keyword">def</span> <span class="term-method">__init__</span>(<span class="term-self">self</span>, <span class="term-self">node</span>):
+        <span class="term-self">self</span>.node = node
+        <span class="term-self">self</span>.status = <span class="term-string">"ACTIVE"</span>
+        <span class="term-self">self</span>.latency = <span class="term-string">"24ms"</span>
+
+    <span class="term-keyword">def</span> <span class="term-method">scale_cluster</span>(<span class="term-self">self</span>):
+        <span class="term-keyword">return</span> [n <span class="term-keyword">for</span> n <span class="term-keyword">in</span> <span class="term-self">self</span>.node <span class="term-keyword">if</span> n.ready]</code></pre>
+                    <div class="px-6 pb-6 flex gap-4">
+                        <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
+                            <div class="term-label text-xs">Uptime</div>
+                            <div class="text-green-400 font-bold">99.9%</div>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
+                            <div class="term-label text-xs">Auth</div>
+                            <div class="text-blue-400 font-bold">RBAC</div>
+                        </div>
+                        <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
+                            <div class="term-label text-xs">Scale</div>
+                            <div class="text-violet-400 font-bold">10x</div>
                         </div>
                     </div>
                 </div>
@@ -239,7 +263,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-white">
+    <section id="about" class="py-20 px-4 sm:px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
@@ -262,7 +286,7 @@
 
                 <div class="reveal stagger-2">
                     <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">About Me</h2>
-                    <h3 class="text-4xl font-bold text-slate-900 mb-6">Focused Engineering.<br>Deep Dive.</h3>
+                    <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">Focused Engineering.<br>Deep Dive.</h3>
                     <p class="text-slate-600 leading-relaxed mb-6">
                         My professional path is defined by intentional growth. I've dedicated my focus to mastering the complexities of distributed systems and backend architecture, building robust solutions from the ground up while specializing in high-performance environments.
                     </p>
@@ -286,11 +310,11 @@
     </section>
 
     <!-- Philosophy Section -->
-    <section id="philosophy" class="py-20 px-6 bg-slate-50">
+    <section id="philosophy" class="py-20 px-4 sm:px-6 bg-slate-50">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-16 reveal">
                 <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">Engineering Philosophy</h2>
-                <h3 class="text-4xl font-bold text-slate-900 mb-4">Built for Scale, Designed for Humans</h3>
+                <h3 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Built for Scale, Designed for Humans</h3>
                 <p class="text-slate-600">A strategic approach to development: focusing on the long-term scalability and structural integrity of every system.</p>
             </div>
 
@@ -323,12 +347,12 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section class="py-20 px-6 bg-slate-900 text-white">
+    <section class="py-20 px-4 sm:px-6 bg-slate-900 text-white">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 reveal">
                 <div>
                     <h2 class="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-3">Technical Stack</h2>
-                    <h3 class="text-4xl font-bold">Engineered with Precision</h3>
+                    <h3 class="text-3xl sm:text-4xl font-bold">Engineered with Precision</h3>
                 </div>
                 <div class="flex gap-3 mt-4 md:mt-0">
                     <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded-full text-xs font-mono border border-slate-700">v2.4.0 Stable</span>
@@ -336,7 +360,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 reveal stagger-1">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 reveal stagger-1">
                 <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-blue-500 hover:bg-slate-800 transition-all duration-300 group">
                     <svg class="w-10 h-10 group-hover:scale-110 transition-transform" viewBox="0 0 32 32" fill="none"><path fill="#2f985c" d="M3.884 12.079v1.312l-0.098-0.018c-0.602-0.105-1.243-0.063-1.789 0.119-1.209 0.404-1.887 1.475-1.826 2.887 0.029 0.633 0.156 1.069 0.43 1.48 0.391 0.589 1.024 0.939 1.95 1.085 0.681 0.108 2.066 0.032 3.003-0.166l0.071-0.016v-7.991h-1.742v1.309zM3.76 14.755l0.124 0.032v2.784l-0.177 0.016c-0.689 0.066-1.143-0.050-1.433-0.37-0.227-0.248-0.343-0.602-0.343-1.037 0-0.771 0.367-1.293 1.013-1.441 0.187-0.042 0.625-0.034 0.816 0.016zM6.655 11.654v0.884h1.742l-0.005-0.879-0.008-0.876-0.863-0.008-0.866-0.005v0.884zM11.379 13.319c-0.615 0.045-1.259 0.203-1.8 0.441l-0.153 0.069v0.665c0 0.52 0.008 0.66 0.034 0.649 0.932-0.399 1.393-0.509 2.043-0.491 0.274 0.008 0.333 0.018 0.396 0.066 0.127 0.092 0.166 0.206 0.166 0.478 0 0.135-0.005 0.245-0.013 0.245-0.076 0-0.591 0.066-0.837 0.108-1.264 0.211-1.919 0.644-2.093 1.375-0.050 0.219-0.050 0.747 0 0.966 0.085 0.354 0.264 0.618 0.549 0.8 0.591 0.383 1.483 0.422 3.813 0.166l0.164-0.018v-1.982c0-1.090-0.013-2.090-0.026-2.222-0.079-0.742-0.433-1.114-1.206-1.261-0.216-0.040-0.789-0.069-1.037-0.053zM12.144 17.154v0.578l-0.23 0.034c-0.359 0.053-0.839 0.047-0.99-0.011-0.275-0.106-0.383-0.414-0.243-0.684 0.076-0.148 0.264-0.269 0.544-0.351 0.137-0.040 0.726-0.137 0.86-0.142l0.058-0.003v0.578zM16.815 13.322c-0.626 0.026-1.56 0.177-2.222 0.354l-0.1 0.026v5.223h1.742l0.005-2.053 0.008-2.050 0.185-0.050c0.132-0.034 0.285-0.050 0.541-0.053 0.322-0.003 0.37 0.003 0.496 0.061 0.171 0.076 0.28 0.198 0.34 0.377 0.042 0.127 0.047 0.303 0.055 1.953l0.008 1.816h1.715l-0.011-2.064c-0.008-1.855-0.013-2.085-0.053-2.235-0.079-0.298-0.198-0.499-0.414-0.718-0.338-0.34-0.792-0.517-1.486-0.575-0.322-0.026-0.414-0.029-0.81-0.011zM28.412 13.343c-1.016 0.185-1.744 0.794-2.05 1.723-0.145 0.435-0.185 0.744-0.169 1.296 0.011 0.33 0.029 0.53 0.066 0.692 0.216 0.921 0.789 1.567 1.644 1.858 0.731 0.251 1.739 0.209 2.404-0.1 0.85-0.39 1.37-1.156 1.496-2.196 0.148-1.203-0.251-2.291-1.032-2.829-0.34-0.235-0.612-0.346-1.058-0.433-0.306-0.061-1.003-0.066-1.301-0.011zM29.383 14.755c0.28 0.103 0.491 0.375 0.607 0.778 0.053 0.182 0.061 0.272 0.061 0.647 0 0.372-0.008 0.464-0.061 0.641-0.116 0.406-0.293 0.644-0.581 0.779-0.129 0.061-0.185 0.071-0.401 0.071-0.214 0-0.272-0.011-0.396-0.069-0.285-0.132-0.456-0.346-0.575-0.705-0.090-0.274-0.114-0.91-0.047-1.235 0.079-0.377 0.237-0.652 0.478-0.816 0.256-0.177 0.599-0.211 0.916-0.092zM23.453 13.346c-0.694 0.074-1.214 0.201-1.668 0.409-1.082 0.496-1.644 1.399-1.644 2.636 0 1.214 0.554 2.093 1.531 2.433 0.554 0.193 1.301 0.201 1.829 0.018 0.129-0.045 0.238-0.076 0.243-0.071 0.021 0.021-0.040 0.52-0.082 0.655-0.135 0.451-0.404 0.707-0.881 0.837-0.245 0.069-1.079 0.069-1.399 0-0.28-0.058-0.668-0.185-0.916-0.298l-0.193-0.087v1.599l0.311 0.095c0.528 0.161 0.974 0.23 1.544 0.23 1.301 0.003 2.227-0.398 2.771-1.198 0.243-0.359 0.399-0.815 0.473-1.396 0.037-0.296 0.045-3.346 0.011-4.053l-0.018-0.378 0.203 0.008 0.206 0.011 0.288-0.602c0.158-0.33 0.282-0.607 0.277-0.615-0.024-0.021-0.549-0.116-0.955-0.171-0.296-0.040-0.583-0.055-1.111-0.063-0.391-0.003-0.76-0.003-0.818 0.003zM23.714 15.13c0.008 0.238 0.021 0.86 0.029 1.385l0.016 0.955-0.1 0.027c-0.39 0.105-0.776 0.105-1.045 0.005-0.449-0.172-0.676-0.557-0.699-1.182-0.018-0.523 0.082-0.858 0.343-1.132 0.288-0.304 0.731-0.467 1.304-0.483l0.137-0.003 0.016 0.428zM6.655 15.447c0 2.99-0.037 3.381-0.362 4.014-0.203 0.396-0.578 0.726-1.14 1.008-0.143 0.071-0.187 0.103-0.158 0.119 0.021 0.013 0.383 0.185 0.802 0.383l0.765 0.362 0.161-0.082c1.024-0.53 1.488-1.272 1.621-2.602 0.018-0.174 0.037-1.264 0.045-2.752l0.016-2.46h-1.75v2.011z"></path></svg>
                     <span class="font-semibold text-sm">Django</span>
@@ -368,7 +392,7 @@
                 </div>
             </div>
 
-            <div class="mt-12 grid md:grid-cols-2 gap-8 reveal stagger-2">
+            <div class="mt-12 grid sm:grid-cols-2 gap-6 sm:gap-8 reveal stagger-2">
                 <div class="bg-slate-800/30 rounded-xl p-6 border border-slate-700">
                     <div class="flex justify-between items-center mb-3">
                         <span class="text-slate-300 font-medium">Django & Python</span>
@@ -402,12 +426,12 @@
     </section>
 
     <!-- Featured Projects Preview -->
-    <section class="py-20 px-6 bg-white">
+    <section class="py-20 px-4 sm:px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
                 <div>
                     <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">Featured Work</h2>
-                    <h3 class="text-4xl font-bold text-slate-900">Selected Projects</h3>
+                    <h3 class="text-3xl sm:text-4xl font-bold text-slate-900">Selected Projects</h3>
                 </div>
                 <a href="/HTML/projects.html" class="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors mt-4 md:mt-0">
                     View All Projects
@@ -427,7 +451,7 @@
                     <div class="p-6">
                         <h4 class="text-xl font-bold text-slate-900 mb-2">SyntaxAndStories</h4>
                         <p class="text-slate-600 text-sm mb-4">Africa-focused developer blogging platform with a coin economy, reward system, and real-time chat.</p>
-                        <div class="flex gap-2 mb-4">
+                        <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Django</span>
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">WebSockets</span>
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">PostgreSQL</span>
@@ -454,7 +478,7 @@
                     <div class="p-6">
                         <h4 class="text-xl font-bold text-slate-900 mb-2">PharmaFlow</h4>
                         <p class="text-slate-600 text-sm mb-4">RBAC inventory management system for pharmaceutical operations with expiry alerts and real-time stock tracking.</p>
-                        <div class="flex gap-2 mb-4">
+                        <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Django</span>
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">RBAC</span>
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Inventory</span>
@@ -473,7 +497,7 @@
                     <div class="p-6">
                         <h4 class="text-xl font-bold text-slate-900 mb-2">BizChat</h4>
                         <p class="text-slate-600 text-sm mb-4">Business chat application with AJAX polling, secure email-based onboarding, and low-latency delivery.</p>
-                        <div class="flex gap-2 mb-4">
+                        <div class="flex flex-wrap gap-2 mb-4">
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Django</span>
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">AJAX</span>
                             <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Real-time</span>
@@ -485,11 +509,11 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 px-6 relative overflow-hidden">
+    <section class="py-20 px-4 sm:px-6 relative overflow-hidden">
         <div class="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600"></div>
         <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
         <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
-            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Build Something Resilient?</h2>
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">Ready to Build Something Resilient?</h2>
             <p class="text-blue-100 text-lg mb-10 max-w-2xl mx-auto">I'm currently open for freelance projects, internships, and full-time opportunities. Let's discuss how I can contribute to your team.</p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="/HTML/contact.html" class="inline-flex items-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-xl">
@@ -504,9 +528,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
-            <div class="md:col-span-2">
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="sm:col-span-2 md:col-span-2">
                 <a href="index.html" class="text-white font-mono font-bold text-xl tracking-tighter mb-4 inline-block">
                     <span class="text-blue-500">[</span>JA<span class="text-blue-500">]</span>
                 </a>
@@ -589,7 +613,8 @@
       },
       "jobTitle": "Full-Stack Software Engineer",
       "sameAs": [
-        "https://github.com/johnston-kweku"
+        "https://github.com/johnston-kweku",
+        "https://www.linkedin.com/in/johnston-abubakar-b94796389/"
       ],
       "knowsAbout": [
         "Django",

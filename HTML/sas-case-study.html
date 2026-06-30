@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Study: SyntaxAndStories | Johnston Kweku Abubakar</title>
-    <meta name="description" content="Deep dive into SyntaxAndStories — an Africa-focused developer blogging platform built with Django, WebSockets, and a coin economy. By Johnston Kweku Abubakar.">
-    <meta name="keywords" content="SyntaxAndStories case study, Django blogging platform, WebSockets chat, coin economy, African developer platform, Johnston Kweku Abubakar">
+    <meta name="description" content="Deep dive into SyntaxAndStories — an Africa-focused developer blogging platform built with Django, WebSockets, Redis, Celery, and a coin economy. By Johnston Kweku Abubakar.">
+    <meta name="keywords" content="SyntaxAndStories case study, Django blogging platform, WebSockets chat, coin economy, African developer platform, Johnston Kweku Abubakar, Redis, Celery, OAuth">
     <meta name="author" content="Johnston Kweku Abubakar">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://johnstonabu.netlify.app/HTML/case-study-syntaxandstories.html">
@@ -13,7 +13,7 @@
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://johnstonabu.netlify.app//HTML/sas-case-study.html">
     <meta property="og:title" content="Case Study: SyntaxAndStories | Johnston Kweku Abubakar">
-    <meta property="og:description" content="How I built an Africa-focused developer blogging platform with Django, WebSockets, and a coin economy.">
+    <meta property="og:description" content="How I built an Africa-focused developer blogging platform with Django, WebSockets, Redis, Celery, and a coin economy.">
     <meta property="og:image" content="https://johnstonabu.netlify.app/assets/images/image.jpeg">
 
     <link rel="stylesheet" href="/css/src/output.css">
@@ -50,10 +50,17 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.875rem;
             line-height: 1.6;
+            max-width: 100%;
         }
         .code-block pre {
-            padding: 1.5rem;
+            padding: 1.25rem;
             overflow-x: auto;
+            color: #abb2bf; /* CRITICAL: light default text for dark bg */
+            -webkit-overflow-scrolling: touch;
+        }
+        .code-block code {
+            color: #abb2bf;
+            font-family: inherit;
         }
         .code-keyword { color: #c678dd; }
         .code-function { color: #61afef; }
@@ -61,6 +68,7 @@
         .code-comment { color: #5c6370; font-style: italic; }
         .code-class { color: #e5c07b; }
         .code-variable { color: #e06c75; }
+        .code-number { color: #d19a66; }
 
         .stat-card {
             transition: all 0.3s ease;
@@ -77,13 +85,25 @@
             transform: scale(1.1) rotate(5deg);
         }
 
-        .timeline-line {
-            position: absolute;
-            left: 24px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+        /* Mobile-safe grids */
+        .safe-grid {
+            min-width: 0;
+        }
+        
+        /* Prevent code block from breaking mobile layout */
+        pre, code {
+            max-width: 100%;
+        }
+        
+        /* Smaller code font on mobile */
+        @media (max-width: 640px) {
+            .code-block {
+                font-size: 0.75rem;
+                border-radius: 8px;
+            }
+            .code-block pre {
+                padding: 0.875rem;
+            }
         }
     </style>
     <noscript>
@@ -93,7 +113,7 @@
 <body class="bg-slate-50 text-slate-900 antialiased">
 
     <nav class="w-full fixed top-0 z-50 left-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
             <a href="/index.html" class="text-slate-900 font-mono font-bold text-xl tracking-tighter hover:scale-105 transition-transform">
                 <span class="text-blue-600">[</span>JA<span class="text-blue-600">]</span>
             </a>
@@ -126,7 +146,7 @@
     </nav>
 
     <!-- Hero -->
-    <section class="pt-32 pb-16 px-6 bg-white border-b border-slate-100">
+    <section class="pt-28 sm:pt-32 pb-16 px-4 sm:px-6 bg-white border-b border-slate-100">
         <div class="max-w-4xl mx-auto reveal">
             <div class="flex items-center gap-3 mb-6">
                 <a href="/HTML/projects.html" class="text-slate-500 hover:text-blue-600 text-sm font-medium inline-flex items-center gap-1 transition-colors">
@@ -139,23 +159,27 @@
 
             <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-semibold mb-6">
                 <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                LIVE ON RENDER
+                LIVE ON RENDER (PAID TIER)
             </div>
 
-            <h1 class="text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">SyntaxAndStories</h1>
-            <p class="text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">SyntaxAndStories</h1>
+            <p class="text-lg sm:text-xl text-slate-600 leading-relaxed mb-8 max-w-3xl">
                 An Africa-focused developer blogging platform built to center African voices in the global tech conversation. 
-                Features a coin economy, reward system, real-time chat via WebSockets, and a complex relational follow system.
+                Features a coin economy, gravity-based feed, real-time chat with link previews, Redis-backed online status, 
+                Celery background tasks, OAuth-only authentication, and a complex relational follow system.
             </p>
 
-            <div class="flex flex-wrap gap-3 mb-8">
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">Django</span>
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">Python</span>
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">WebSockets</span>
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">PostgreSQL</span>
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">Tailwind CSS</span>
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">Vanilla JS</span>
-                <span class="bg-slate-100 text-slate-700 px-4 py-2 rounded-full text-sm font-medium">Render</span>
+            <div class="flex flex-wrap gap-2 sm:gap-3 mb-8">
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Django</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Python</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">WebSockets</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">PostgreSQL</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Redis</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Celery</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Cloudinary</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">OAuth 2.0</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Tailwind CSS</span>
+                <span class="bg-slate-100 text-slate-700 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">Render</span>
             </div>
 
             <div class="flex gap-4">
@@ -163,42 +187,38 @@
                     Visit Live App
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                 </a>
-                <a href="https://github.com/johnston-kweku" target="_blank" class="inline-flex items-center gap-2 bg-white text-slate-700 border border-slate-200 font-semibold px-6 py-3 rounded-xl hover:border-slate-300 transition-all duration-300">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.041-1.416-4.041-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                    View Source
-                </a>
             </div>
         </div>
     </section>
 
     <!-- Stats Bar -->
-    <section class="py-12 px-6 bg-slate-900">
-        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 reveal">
-            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-white mb-1">7+</div>
-                <div class="text-slate-400 text-sm">Core Features</div>
+    <section class="py-12 px-4 sm:px-6 bg-slate-900">
+        <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 reveal">
+            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-5 sm:p-6 text-center">
+                <div class="text-2xl sm:text-3xl font-bold text-white mb-1">10+</div>
+                <div class="text-slate-400 text-xs sm:text-sm">Core Features</div>
             </div>
-            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-blue-400 mb-1">WebSockets</div>
-                <div class="text-slate-400 text-sm">Real-Time Chat</div>
+            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-5 sm:p-6 text-center">
+                <div class="text-2xl sm:text-3xl font-bold text-blue-400 mb-1">WebSockets</div>
+                <div class="text-slate-400 text-xs sm:text-sm">Real-Time Chat</div>
             </div>
-            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-violet-400 mb-1">Coin</div>
-                <div class="text-slate-400 text-sm">Economy System</div>
+            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-5 sm:p-6 text-center">
+                <div class="text-2xl sm:text-3xl font-bold text-violet-400 mb-1">Coin</div>
+                <div class="text-slate-400 text-xs sm:text-sm">Economy System</div>
             </div>
-            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-6 text-center">
-                <div class="text-3xl font-bold text-green-400 mb-1">Render</div>
-                <div class="text-slate-400 text-sm">Cloud Hosting</div>
+            <div class="stat-card bg-slate-800/50 border border-slate-700 rounded-xl p-5 sm:p-6 text-center">
+                <div class="text-2xl sm:text-3xl font-bold text-green-400 mb-1">Paid Tier</div>
+                <div class="text-slate-400 text-xs sm:text-sm">Render Hosting</div>
             </div>
         </div>
     </section>
 
     <!-- The Problem -->
-    <section class="py-20 px-6 bg-white">
+    <section class="py-20 px-4 sm:px-6 bg-white">
         <div class="max-w-4xl mx-auto">
             <div class="reveal">
                 <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">01. The Problem</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Why Africa Needs Its Own Developer Platform</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">Why Africa Needs Its Own Developer Platform</h3>
                 <div class="prose prose-lg text-slate-600 max-w-none">
                     <p class="mb-4">
                         Every major developer social platform — Dev.to, Hashnode, Medium — is Western-centered. They're built around the lives, experiences, and cultural contexts of developers in the US and Europe. The tutorials, the success stories, the networking opportunities, even the writing prompts — they all assume a Western tech ecosystem.
@@ -215,47 +235,63 @@
     </section>
 
     <!-- Architecture Overview -->
-    <section class="py-20 px-6 bg-slate-50">
+    <section class="py-20 px-4 sm:px-6 bg-slate-50">
         <div class="max-w-4xl mx-auto">
             <div class="reveal">
                 <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">02. Architecture</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">System Design First</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">System Design First</h3>
                 <p class="text-slate-600 text-lg mb-10">
-                    Before writing any code, I mapped out the entire data flow. The platform needed to handle real-time chat, a coin economy, social interactions, and content management — all while staying performant on a single Render instance.
+                    Before writing any code, I mapped out the entire data flow. The platform needed to handle real-time chat, a coin economy, social interactions, gravity-based content ranking, background tasks, and media processing — all while staying performant and secure.
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
-                <div class="reveal stagger-1 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
+            <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 mb-12">
+                <div class="reveal stagger-1 safe-grid bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
                     <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-2">Database Layer</h4>
-                    <p class="text-slate-600 text-sm">PostgreSQL with carefully normalized models. User profiles, posts, comments, follows, and coin transactions all live in relational tables with proper indexing for performance.</p>
+                    <p class="text-slate-600 text-sm">PostgreSQL with a custom User model extending AbstractUser for maximum flexibility. User profiles, posts, comments, follows, blocks, reports, and coin transactions all live in normalized tables with proper indexing. Cloudinary handles media storage.</p>
                 </div>
 
-                <div class="reveal stagger-2 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
+                <div class="reveal stagger-2 safe-grid bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
                     <div class="w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-2">Real-Time Layer</h4>
-                    <p class="text-slate-600 text-sm">WebSockets power the chat system for instant message delivery. Django Channels handles the connection management, with Redis as the channel layer backend.</p>
+                    <p class="text-slate-600 text-sm">WebSockets power the chat system for instant message delivery with rich link previews. Django Channels handles connection management, with Redis as the channel layer backend.</p>
                 </div>
 
-                <div class="reveal stagger-3 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
+                <div class="reveal stagger-3 safe-grid bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
                     <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-2">Economy Layer</h4>
-                    <p class="text-slate-600 text-sm">A custom coin economy where users earn digital coins through engagement — writing posts, receiving likes, gaining followers. Coins can be spent on platform features.</p>
+                    <p class="text-slate-600 text-sm">A custom coin economy where users earn digital coins through engagement. All coin mutations use Django F() expressions wrapped in atomic transactions to eliminate race conditions. A separate Transaction model provides an immutable audit log.</p>
                 </div>
 
-                <div class="reveal stagger-4 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
+                <div class="reveal stagger-4 safe-grid bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
                     <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
                         <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-2">Social Layer</h4>
-                    <p class="text-slate-600 text-sm">AJAX-driven follow, like, and comment systems. No page reloads for social interactions. The follow system uses a self-referential Many-to-Many relationship for scalability.</p>
+                    <p class="text-slate-600 text-sm">AJAX-driven follow, like, comment, and block systems with no page reloads. The follow system uses a dedicated Follow model with unique_together constraints. The feed uses a gravity-based ranking algorithm balancing recency and engagement.</p>
+                </div>
+
+                <div class="reveal stagger-1 safe-grid bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Cache & Status Layer</h4>
+                    <p class="text-slate-600 text-sm">Redis serves dual duty: as the Channels layer backend for WebSockets and as a fast cache for online status tracking. User presence is stored in Redis with TTL expiration, enabling real-time "online now" indicators without hammering PostgreSQL.</p>
+                </div>
+
+                <div class="reveal stagger-2 safe-grid bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Background Task Layer</h4>
+                    <p class="text-slate-600 text-sm">Celery workers handle offline-heavy lifting: sending email notifications, processing link previews, cleaning up stale sessions, and batch-updating gravity feed scores. This keeps the request/response cycle fast and snappy.</p>
                 </div>
             </div>
 
@@ -265,63 +301,128 @@
                     <span class="w-3 h-3 rounded-full bg-red-500"></span>
                     <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
                     <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                    <span class="ml-4 text-slate-400 text-xs font-mono">models.py — Follow System</span>
+                    <span class="ml-4 text-slate-400 text-xs font-mono">models.py — Custom User Model</span>
                 </div>
-                <pre><code><span class="code-keyword">from</span> django.db <span class="code-keyword">import</span> models
-<span class="code-keyword">from</span> django.contrib.auth.models <span class="code-keyword">import</span> User
+                <pre><code><span class="code-keyword">from</span> django.db <span class="code-keyword">import</span> models, transaction
+<span class="code-keyword">from</span> django.contrib.auth.models <span class="code-keyword">import</span> AbstractUser
+<span class="code-keyword">from</span> django.core.validators <span class="code-keyword">import</span> FileExtensionValidator
+<span class="code-keyword">from</span> django.conf <span class="code-keyword">import</span> settings
+<span class="code-keyword">from</span> decimal <span class="code-keyword">import</span> Decimal
 
-<span class="code-keyword">class</span> <span class="code-class">Profile</span>(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+<span class="code-keyword">class</span> <span class="code-class">User</span>(AbstractUser):
+    <span class="code-comment"># Profile fields</span>
+    full_name = models.CharField(max_length=<span class="code-number">255</span>, blank=<span class="code-keyword">True</span>)
     bio = models.TextField(blank=<span class="code-keyword">True</span>)
-    coins = models.PositiveIntegerField(default=<span class="code-string">0</span>)
-    followers = models.ManyToManyField(
-        <span class="code-string">'self'</span>,
-        symmetrical=<span class="code-keyword">False</span>,
-        related_name=<span class="code-string">'following'</span>,
-        blank=<span class="code-keyword">True</span>
+    location = models.CharField(max_length=<span class="code-number">200</span>, blank=<span class="code-keyword">True</span>)
+    link = models.URLField(blank=<span class="code-keyword">True</span>)
+    skills = models.CharField(max_length=<span class="code-number">500</span>, blank=<span class="code-keyword">True</span>)
+    
+    <span class="code-comment"># Media with validation</span>
+    profile_picture = models.ImageField(
+        upload_to=<span class="code-string">"profile_pictures/"</span>,
+        blank=<span class="code-keyword">True</span>, null=<span class="code-keyword">True</span>,
+        validators=[FileExtensionValidator(
+            allowed_extensions=[<span class="code-string">'jpg'</span>, <span class="code-string">'jpeg'</span>, <span class="code-string">'png'</span>]
+        )]
     )
 
-    <span class="code-keyword">def</span> <span class="code-function">follow</span>(<span class="code-variable">self</span>, profile):
-        <span class="code-keyword">if</span> profile != <span class="code-variable">self</span>:
-            <span class="code-variable">self</span>.followers.add(profile)
+    <span class="code-comment"># Social counters (denormalized for performance)</span>
+    follower_count = models.PositiveBigIntegerField(default=<span class="code-number">0</span>, db_index=<span class="code-keyword">True</span>)
+    following_count = models.PositiveBigIntegerField(default=<span class="code-number">0</span>, db_index=<span class="code-keyword">True</span>)
 
-    <span class="code-keyword">def</span> <span class="code-function">unfollow</span>(<span class="code-variable">self</span>, profile):
-        <span class="code-variable">self</span>.followers.remove(profile)</code></pre>
+    <span class="code-comment"># Economy</span>
+    is_verified = models.BooleanField(default=<span class="code-keyword">False</span>, db_index=<span class="code-keyword">True</span>)
+    is_premium = models.BooleanField(default=<span class="code-keyword">False</span>, db_index=<span class="code-keyword">True</span>)
+    coin_balance = models.DecimalField(
+        max_digits=<span class="code-number">10</span>, decimal_places=<span class="code-number">2</span>, default=<span class="code-number">0.00</span>
+    )
+
+    <span class="code-keyword">def</span> <span class="code-function">transfer_coins</span>(<span class="code-variable">self</span>, receiver, amount):
+        <span class="code-string">"""Safely transfers coins using atomic transactions."""</span>
+        amount = Decimal(<span class="code-function">str</span>(amount))
+        <span class="code-keyword">if</span> amount <= <span class="code-number">0</span>:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>, <span class="code-string">"Amount must be positive"</span>
+        <span class="code-keyword">if</span> <span class="code-variable">self</span>.coin_balance < amount:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>, <span class="code-string">"Insufficient coin balance"</span>
+        <span class="code-keyword">if</span> <span class="code-variable">self</span> == receiver:
+            <span class="code-keyword">return</span> <span class="code-keyword">False</span>, <span class="code-string">"You cannot send coins to yourself"</span>
+
+        <span class="code-keyword">with</span> transaction.atomic():
+            <span class="code-variable">self</span>.coin_balance -= amount
+            receiver.coin_balance += amount
+            <span class="code-variable">self</span>.save()
+            receiver.save()
+        <span class="code-keyword">return</span> <span class="code-keyword">True</span>, <span class="code-string">f"Successfully sent {amount} coins"</span>
+
+    <span class="code-keyword">def</span> <span class="code-function">save</span>(<span class="code-variable">self</span>, *args, **kwargs):
+        <span class="code-string">"""Auto-downscale profile images to save Cloudinary space."""</span>
+        new_picture = <span class="code-keyword">False</span>
+        <span class="code-keyword">try</span>:
+            <span class="code-keyword">if</span> <span class="code-variable">self</span>.id:
+                this = User.objects.get(id=<span class="code-variable">self</span>.id)
+                <span class="code-keyword">if</span> this.profile_picture != <span class="code-variable">self</span>.profile_picture:
+                    new_picture = <span class="code-keyword">True</span>
+            <span class="code-keyword">else</span>:
+                new_picture = <span class="code-keyword">True</span>
+        <span class="code-keyword">except</span> User.DoesNotExist:
+            new_picture = <span class="code-keyword">True</span>
+
+        <span class="code-keyword">if</span> new_picture <span class="code-keyword">and</span> <span class="code-variable">self</span>.profile_picture:
+            <span class="code-keyword">from</span> PIL <span class="code-keyword">import</span> Image
+            <span class="code-keyword">from</span> io <span class="code-keyword">import</span> BytesIO
+            <span class="code-keyword">from</span> django.core.files.base <span class="code-keyword">import</span> ContentFile
+            <span class="code-keyword">import</span> os
+
+            img = Image.open(<span class="code-variable">self</span>.profile_picture)
+            <span class="code-keyword">if</span> img.mode != <span class="code-string">'RGB'</span>:
+                img = img.convert(<span class="code-string">'RGB'</span>)
+
+            img.thumbnail((<span class="code-number">300</span>, <span class="code-number">300</span>), Image.LANCZOS)
+            output = BytesIO()
+            img.save(output, format=<span class="code-string">'JPEG'</span>, quality=<span class="code-number">60</span>, optimize=<span class="code-keyword">True</span>)
+            output.seek(<span class="code-number">0</span>)
+
+            name = os.path.splitext(
+                os.path.basename(<span class="code-variable">self</span>.profile_picture.name)
+            )[<span class="code-number">0</span>] + <span class="code-string">'.jpg'</span>
+            <span class="code-variable">self</span>.profile_picture = ContentFile(output.read(), name=name)
+
+        <span class="code-function">super</span>().save(*args, **kwargs)</code></pre>
             </div>
         </div>
     </section>
 
     <!-- Key Features -->
-    <section class="py-20 px-6 bg-white">
+    <section class="py-20 px-4 sm:px-6 bg-white">
         <div class="max-w-7xl mx-auto">
             <div class="text-center max-w-2xl mx-auto mb-16 reveal">
                 <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">03. Key Features</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">What Makes It Work</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">What Makes It Work</h3>
                 <p class="text-slate-600">A breakdown of the most technically interesting parts of the platform.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="reveal stagger-1 feature-item bg-slate-50 rounded-2xl p-8 border border-slate-100">
+            <div class="grid sm:grid-cols-2 gap-6 sm:gap-8">
+                <div class="reveal stagger-1 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
                     <div class="feature-icon w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
                     </div>
-                    <h4 class="text-xl font-bold text-slate-900 mb-3">Real-Time Chat (WebSockets)</h4>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Real-Time Chat with Link Previews</h4>
                     <p class="text-slate-600 leading-relaxed mb-4">
-                        The chat system uses Django Channels with WebSockets for instant message delivery. Unlike AJAX polling which hits the server every few seconds, WebSockets maintain a persistent connection — reducing server load and delivering messages in milliseconds.
+                        The chat system uses Django Channels with WebSockets for instant message delivery. Unlike AJAX polling, WebSockets maintain a persistent connection. To fix raw, naked-looking links, Celery background workers fetch OpenGraph metadata and generate rich link previews before the message is broadcast.
                     </p>
                     <div class="bg-white rounded-lg p-4 border border-slate-200">
-                        <div class="text-xs text-slate-500 font-mono mb-2">consumer.py</div>
-                        <code class="text-sm text-slate-700 font-mono">async def connect(self):<br>    await self.accept()<br>    await self.channel_layer.group_add(<br>        "chat_" + self.room_name, <br>        self.channel_name<br>    )</code>
+                        <div class="text-xs text-slate-500 font-mono mb-2">Flow</div>
+                        <code class="text-sm text-slate-700 font-mono">User sends message → Extract URLs →<br>Celery fetches OG tags → Broadcast<br>rich preview via WebSocket</code>
                     </div>
                 </div>
 
-                <div class="reveal stagger-2 feature-item bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                <div class="reveal stagger-2 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
                     <div class="feature-icon w-14 h-14 bg-violet-100 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-7 h-7 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-2.905.716-3.929 1.663M12 8c1.657 0 2.905.716 3.929 1.663M12 8v8m-3.929-1.337c.836.905 1.993 1.337 3.929 1.337s3.093-.432 3.929-1.337M9.071 14.663L7.5 16.5m7.429-1.837L16.5 16.5"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Coin Economy & Rewards</h4>
                     <p class="text-slate-600 leading-relaxed mb-4">
-                        Users earn coins through platform engagement: publishing posts, receiving likes, gaining followers, and daily check-ins. The economy is designed to incentivize quality content creation without gamifying the platform into toxicity.
+                        Users earn coins through platform engagement. All coin mutations are protected by Django F() expressions and <code>transaction.atomic()</code> to prevent race conditions during concurrent transactions. An immutable Transaction ledger provides a full audit trail.
                     </p>
                     <div class="bg-white rounded-lg p-4 border border-slate-200">
                         <div class="text-xs text-slate-500 font-mono mb-2">Reward Rules</div>
@@ -334,31 +435,92 @@
                     </div>
                 </div>
 
-                <div class="reveal stagger-3 feature-item bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                <div class="reveal stagger-3 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
                     <div class="feature-icon w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">Relational Follow System</h4>
                     <p class="text-slate-600 leading-relaxed mb-4">
-                        A self-referential Many-to-Many relationship powers the follow/unfollow logic. The system efficiently queries follower counts, following lists, and mutual connections without N+1 query problems thanks to Django's select_related and prefetch_related.
+                        A dedicated Follow model with a unique_together constraint on (follower, following) prevents duplicate relationships. The system efficiently queries follower counts, following lists, and mutual connections without N+1 query problems thanks to prefetch_related and annotated counters.
                     </p>
                     <div class="bg-white rounded-lg p-4 border border-slate-200">
                         <div class="text-xs text-slate-500 font-mono mb-2">Optimized Query</div>
-                        <code class="text-sm text-slate-700 font-mono">Profile.objects.prefetch_related(<br>    'followers', 'following'<br>).annotate(<br>    follower_count=Count('followers')<br>)</code>
+                        <code class="text-sm text-slate-700 font-mono">User.objects.prefetch_related(<br>    'following', 'followers'<br>).annotate(...)</code>
                     </div>
                 </div>
 
-                <div class="reveal stagger-4 feature-item bg-slate-50 rounded-2xl p-8 border border-slate-100">
+                <div class="reveal stagger-4 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
                     <div class="feature-icon w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6">
                         <svg class="w-7 h-7 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold text-slate-900 mb-3">AJAX Social Interactions</h4>
                     <p class="text-slate-600 leading-relaxed mb-4">
-                        Like, follow, and comment actions happen without page reloads. Vanilla JavaScript handles the DOM updates, while Django views return JSON responses. This creates a seamless, app-like experience while keeping the stack lightweight.
+                        Like, follow, comment, and block actions happen without page reloads. Vanilla JavaScript handles DOM updates while Django views return JSON responses. Rate limiting middleware prevents API abuse by throttling endpoints per user.
                     </p>
                     <div class="bg-white rounded-lg p-4 border border-slate-200">
-                        <div class="text-xs text-slate-500 font-mono mb-2">AJAX Pattern</div>
+                        <div class="text-xs text-slate-500 font-mono mb-2">AJAX + Rate Limiting</div>
                         <code class="text-sm text-slate-700 font-mono">fetch('/api/like/', {<br>  method: 'POST',<br>  body: JSON.stringify({post_id: id})<br>}).then(r => r.json())<br>.then(data => updateUI(data))</code>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-1 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
+                    <div class="feature-icon w-14 h-14 bg-indigo-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">OAuth-Only Authentication</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Authentication is handled entirely through OAuth 2.0 via GitHub and Google. No passwords are ever stored in the database, eliminating an entire class of security vulnerabilities (breaches, rainbow tables, weak passwords) and simplifying the user onboarding flow.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 border border-slate-200">
+                        <div class="text-xs text-slate-500 font-mono mb-2">Providers</div>
+                        <ul class="text-sm text-slate-700 space-y-1">
+                            <li>• GitHub OAuth 2.0</li>
+                            <li>• Google OAuth 2.0</li>
+                            <li>• Zero password storage</li>
+                            <li>• Custom user model flexibility</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-2 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
+                    <div class="feature-icon w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Gravity-Based Feed</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Instead of a simple chronological feed, posts are ranked using a gravity-based algorithm that balances engagement (likes, comments, coins earned) against time decay. High-quality posts get more airtime, but recency still matters — preventing stale content from dominating.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 border border-slate-200">
+                        <div class="text-xs text-slate-500 font-mono mb-2">Gravity Score</div>
+                        <code class="text-sm text-slate-700 font-mono">score = (likes * 2 + comments * 3)<br>         / (hours_since_post + 2)^1.5</code>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-3 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
+                    <div class="feature-icon w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Redis Online Status</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        User online status is tracked in Redis with automatic TTL expiration. When a user connects via WebSocket, their presence is written to Redis. When they disconnect, it expires after a short grace period. This powers "online now" badges without database writes on every heartbeat.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 border border-slate-200">
+                        <div class="text-xs text-slate-500 font-mono mb-2">Redis Pattern</div>
+                        <code class="text-sm text-slate-700 font-mono">SET user:123:online 1 EX 60<br>GET user:123:online → 1 (or nil)</code>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-4 feature-item safe-grid bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100">
+                    <div class="feature-icon w-14 h-14 bg-cyan-100 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Celery Background Tasks</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Heavy or slow operations are offloaded to Celery workers: generating link previews, sending batch email notifications, computing gravity feed scores, and cleaning up deactivated accounts. This keeps the web workers responsive and the user experience snappy.
+                    </p>
+                    <div class="bg-white rounded-lg p-4 border border-slate-200">
+                        <div class="text-xs text-slate-500 font-mono mb-2">tasks.py</div>
+                        <code class="text-sm text-slate-700 font-mono">@shared_task<br>def generate_link_preview(msg_id):<br>    msg = Message.objects.get(id=msg_id)<br>    msg.preview = fetch_og(msg.text)<br>    msg.save()</code>
                     </div>
                 </div>
             </div>
@@ -366,18 +528,36 @@
     </section>
 
     <!-- Challenges -->
-    <section class="py-20 px-6 bg-slate-50">
+    <section class="py-20 px-4 sm:px-6 bg-slate-50">
         <div class="max-w-4xl mx-auto">
             <div class="reveal">
                 <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">04. Challenges & Solutions</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">What Went Wrong & How I Fixed It</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">What Went Wrong & How I Fixed It</h3>
             </div>
 
             <div class="space-y-8 mt-10">
-                <div class="reveal stagger-1 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
+                <div class="reveal stagger-1 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
                             <span class="text-red-600 font-bold text-sm">1</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Coin Economy Race Conditions</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                Two users liking a post simultaneously — or a user transferring coins while receiving a reward — could result in incorrect balances due to non-atomic read-modify-write operations.
+                            </p>
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                                <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
+                                <p class="text-green-700 text-sm">Wrapped all coin mutations in Django's <code>F()</code> expressions and <code>transaction.atomic()</code>. This ensures atomic increments without race conditions, even under concurrent load. The Transaction model provides an immutable audit log for every mutation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-2 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                            <span class="text-red-600 font-bold text-sm">2</span>
                         </div>
                         <div>
                             <h4 class="text-lg font-bold text-slate-900 mb-2">WebSocket Connection Drops on Mobile</h4>
@@ -392,37 +572,91 @@
                     </div>
                 </div>
 
-                <div class="reveal stagger-2 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
-                    <div class="flex items-start gap-4">
-                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
-                            <span class="text-red-600 font-bold text-sm">2</span>
-                        </div>
-                        <div>
-                            <h4 class="text-lg font-bold text-slate-900 mb-2">Coin Economy Race Conditions</h4>
-                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                                Two users liking a post simultaneously could result in incorrect coin counts due to non-atomic read-modify-write operations.
-                            </p>
-                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
-                                <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
-                                <p class="text-green-700 text-sm">Wrapped coin transactions in Django's F() expressions and database-level SELECT FOR UPDATE. This ensures atomic increments without race conditions, even under concurrent load.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="reveal stagger-3 bg-white rounded-2xl p-8 border border-slate-200 shadow-lg">
+                <div class="reveal stagger-3 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
                     <div class="flex items-start gap-4">
                         <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
                             <span class="text-red-600 font-bold text-sm">3</span>
                         </div>
                         <div>
-                            <h4 class="text-lg font-bold text-slate-900 mb-2">Render Cold Start Latency</h4>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Raw, Naked Links in Chat</h4>
                             <p class="text-slate-600 text-sm leading-relaxed mb-3">
-                                Hosting on Render's free tier meant the server would spin down after inactivity. First requests after a period of silence would take 10-30 seconds to respond.
+                                Users pasting URLs into chat resulted in long, unstyled strings that broke the UI flow and gave no context about where the link led.
                             </p>
                             <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
                                 <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
-                                <p class="text-green-700 text-sm">Implemented a lightweight health-check endpoint and configured a cron job to ping the server every 10 minutes. This keeps the instance warm without consuming meaningful resources.</p>
+                                <p class="text-green-700 text-sm">Built a link preview pipeline using Celery. When a message contains a URL, a background task fetches the page, parses OpenGraph tags (title, description, image), and attaches the metadata before broadcasting the enriched message to all clients.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-1 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                            <span class="text-red-600 font-bold text-sm">4</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">API Abuse & Spam</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                Without rate limiting, endpoints for liking, following, and coin transfers were vulnerable to bot attacks and accidental brute-force usage.
+                            </p>
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                                <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
+                                <p class="text-green-700 text-sm">Implemented per-user rate limiting on all sensitive API endpoints. Throttling is based on authenticated user IDs rather than IP addresses (since multiple users can share a network), with stricter limits on coin transfers and report submissions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-2 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                            <span class="text-red-600 font-bold text-sm">5</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Cloudinary Storage Bloat</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                Users uploading high-resolution profile pictures and post images quickly consumed Cloudinary storage quota. Unoptimized 4MB JPEGs were being stored for 300px avatars.
+                            </p>
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                                <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
+                                <p class="text-green-700 text-sm">Overrode the User model's <code>save()</code> method to auto-downscale images using Pillow before they hit Cloudinary. Profile pictures are resized to 300px and compressed to 60% quality JPEG, typically reducing file size by 80-90%.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-3 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                            <span class="text-red-600 font-bold text-sm">6</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Chronological Feed Stagnation</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                A simple "newest first" feed meant that a single popular post could dominate the timeline for days, while quality niche content from smaller creators was buried within hours.
+                            </p>
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                                <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
+                                <p class="text-green-700 text-sm">Replaced the chronological feed with a gravity-based ranking algorithm. Each post gets a score based on engagement weighted against time decay. Celery recalculates scores periodically, ensuring the feed stays fresh and meritocratic.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-1 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-lg">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center shrink-0 mt-1">
+                            <span class="text-red-600 font-bold text-sm">7</span>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-slate-900 mb-2">Blocking the Request Loop</h4>
+                            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                                Sending welcome emails, processing link previews, and updating feed scores synchronously inside HTTP request handlers created slow responses and occasional timeouts.
+                            </p>
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded-r-lg">
+                                <p class="text-green-800 text-sm font-medium mb-1">Solution:</p>
+                                <p class="text-green-700 text-sm">Introduced Celery with Redis as the broker. All non-critical work is now queued as background tasks: emails, OG tag fetching, gravity score recomputation, and periodic cleanup jobs. Web workers stay fast and only handle the request/response cycle.</p>
                             </div>
                         </div>
                     </div>
@@ -432,61 +666,101 @@
     </section>
 
     <!-- Tech Stack Deep Dive -->
-    <section class="py-20 px-6 bg-white">
+    <section class="py-20 px-4 sm:px-6 bg-white">
         <div class="max-w-4xl mx-auto">
             <div class="reveal">
                 <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">05. Tech Stack</h2>
-                <h3 class="text-3xl md:text-4xl font-bold text-slate-900 mb-6">The Tools That Power It</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-6">The Tools That Power It</h3>
             </div>
 
             <div class="space-y-6 mt-10">
-                <div class="reveal stagger-1 flex items-center gap-6 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
-                        <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none"><path fill="#2f985c" d="M3.884 12.079v1.312l-0.098-0.018c-0.602-0.105-1.243-0.063-1.789 0.119-1.209 0.404-1.887 1.475-1.826 2.887 0.029 0.633 0.156 1.069 0.43 1.48 0.391 0.589 1.024 0.939 1.95 1.085 0.681 0.108 2.066 0.032 3.003-0.166l0.071-0.016v-7.991h-1.742v1.309zM3.76 14.755l0.124 0.032v2.784l-0.177 0.016c-0.689 0.066-1.143-0.050-1.433-0.37-0.227-0.248-0.343-0.602-0.343-1.037 0-0.771 0.367-1.293 1.013-1.441 0.187-0.042 0.625-0.034 0.816 0.016zM6.655 11.654v0.884h1.742l-0.005-0.879-0.008-0.876-0.863-0.008-0.866-0.005v0.884zM11.379 13.319c-0.615 0.045-1.259 0.203-1.8 0.441l-0.153 0.069v0.665c0 0.52 0.008 0.66 0.034 0.649 0.932-0.399 1.393-0.509 2.043-0.491 0.274 0.008 0.333 0.018 0.396 0.066 0.127 0.092 0.166 0.206 0.166 0.478 0 0.135-0.005 0.245-0.013 0.245-0.076 0-0.591 0.066-0.837 0.108-1.264 0.211-1.919 0.644-2.093 1.375-0.050 0.219-0.050 0.747 0 0.966 0.085 0.354 0.264 0.618 0.549 0.8 0.591 0.383 1.483 0.422 3.813 0.166l0.164-0.018v-1.982c0-1.090-0.013-2.090-0.026-2.222-0.079-0.742-0.433-1.114-1.206-1.261-0.216-0.040-0.789-0.069-1.037-0.053zM12.144 17.154v0.578l-0.23 0.034c-0.359 0.053-0.839 0.047-0.99-0.011-0.275-0.106-0.383-0.414-0.243-0.684 0.076-0.148 0.264-0.269 0.544-0.351 0.137-0.040 0.726-0.137 0.86-0.142l0.058-0.003v0.578zM16.815 13.322c-0.626 0.026-1.56 0.177-2.222 0.354l-0.1 0.026v5.223h1.742l0.005-2.053 0.008-2.050 0.185-0.050c0.132-0.034 0.285-0.050 0.541-0.053 0.322-0.003 0.37 0.003 0.496 0.061 0.171 0.076 0.28 0.198 0.34 0.377 0.042 0.127 0.047 0.303 0.055 1.953l0.008 1.816h1.715l-0.011-2.064c-0.008-1.855-0.013-2.085-0.053-2.235-0.079-0.298-0.198-0.499-0.414-0.718-0.338-0.34-0.792-0.517-1.486-0.575-0.322-0.026-0.414-0.029-0.81-0.011zM28.412 13.343c-1.016 0.185-1.744 0.794-2.05 1.723-0.145 0.435-0.185 0.744-0.169 1.296 0.011 0.33 0.029 0.53 0.066 0.692 0.216 0.921 0.789 1.567 1.644 1.858 0.731 0.251 1.739 0.209 2.404-0.1 0.85-0.39 1.37-1.156 1.496-2.196 0.148-1.203-0.251-2.291-1.032-2.829-0.34-0.235-0.612-0.346-1.058-0.433-0.306-0.061-1.003-0.066-1.301-0.011zM29.383 14.755c0.28 0.103 0.491 0.375 0.607 0.778 0.053 0.182 0.061 0.272 0.061 0.647 0 0.372-0.008 0.464-0.061 0.641-0.116 0.406-0.293 0.644-0.581 0.779-0.129 0.061-0.185 0.071-0.401 0.071-0.214 0-0.272-0.011-0.396-0.069-0.285-0.132-0.456-0.346-0.575-0.705-0.090-0.274-0.114-0.91-0.047-1.235 0.079-0.377 0.237-0.652 0.478-0.816 0.256-0.177 0.599-0.211 0.916-0.092zM23.453 13.346c-0.694 0.074-1.214 0.201-1.668 0.409-1.082 0.496-1.644 1.399-1.644 2.636 0 1.214 0.554 2.093 1.531 2.433 0.554 0.193 1.301 0.201 1.829 0.018 0.129-0.045 0.238-0.076 0.243-0.071 0.021 0.021-0.040 0.52-0.082 0.655-0.135 0.451-0.404 0.707-0.881 0.837-0.245 0.069-1.079 0.069-1.399 0-0.28-0.058-0.668-0.185-0.916-0.298l-0.193-0.087v1.599l0.311 0.095c0.528 0.161 0.974 0.23 1.544 0.23 1.301 0.003 2.227-0.398 2.771-1.198 0.243-0.359 0.399-0.815 0.473-1.396 0.037-0.296 0.045-3.346 0.011-4.053l-0.018-0.378 0.203 0.008 0.206 0.011 0.288-0.602c0.158-0.33 0.282-0.607 0.277-0.615-0.024-0.021-0.549-0.116-0.955-0.171-0.296-0.040-0.583-0.055-1.111-0.063-0.391-0.003-0.76-0.003-0.818 0.003zM23.714 15.13c0.008 0.238 0.021 0.86 0.029 1.385l0.016 0.955-0.1 0.027c-0.39 0.105-0.776 0.105-1.045 0.005-0.449-0.172-0.676-0.557-0.699-1.182-0.018-0.523 0.082-0.858 0.343-1.132 0.288-0.304 0.731-0.467 1.304-0.483l0.137-0.003 0.016 0.428zM6.655 15.447c0 2.99-0.037 3.381-0.362 4.014-0.203 0.396-0.578 0.726-1.14 1.008-0.143 0.071-0.187 0.103-0.158 0.119 0.021 0.013 0.383 0.185 0.802 0.383l0.765 0.362 0.161-0.082c1.024-0.53 1.488-1.272 1.621-2.602 0.018-0.174 0.037-1.264 0.045-2.752l0.016-2.46h-1.75v2.011z"></path></svg>
+                <div class="reveal stagger-1 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 32 32" fill="none"><path fill="#2f985c" d="M3.884 12.079v1.312l-0.098-0.018c-0.602-0.105-1.243-0.063-1.789 0.119-1.209 0.404-1.887 1.475-1.826 2.887 0.029 0.633 0.156 1.069 0.43 1.48 0.391 0.589 1.024 0.939 1.95 1.085 0.681 0.108 2.066 0.032 3.003-0.166l0.071-0.016v-7.991h-1.742v1.309zM3.76 14.755l0.124 0.032v2.784l-0.177 0.016c-0.689 0.066-1.143-0.050-1.433-0.37-0.227-0.248-0.343-0.602-0.343-1.037 0-0.771 0.367-1.293 1.013-1.441 0.187-0.042 0.625-0.034 0.816 0.016zM6.655 11.654v0.884h1.742l-0.005-0.879-0.008-0.876-0.863-0.008-0.866-0.005v0.884zM11.379 13.319c-0.615 0.045-1.259 0.203-1.8 0.441l-0.153 0.069v0.665c0 0.52 0.008 0.66 0.034 0.649 0.932-0.399 1.393-0.509 2.043-0.491 0.274 0.008 0.333 0.018 0.396 0.066 0.127 0.092 0.166 0.206 0.166 0.478 0 0.135-0.005 0.245-0.013 0.245-0.076 0-0.591 0.066-0.837 0.108-1.264 0.211-1.919 0.644-2.093 1.375-0.050 0.219-0.050 0.747 0 0.966 0.085 0.354 0.264 0.618 0.549 0.8 0.591 0.383 1.483 0.422 3.813 0.166l0.164-0.018v-1.982c0-1.090-0.013-2.090-0.026-2.222-0.079-0.742-0.433-1.114-1.206-1.261-0.216-0.040-0.789-0.069-1.037-0.053zM12.144 17.154v0.578l-0.23 0.034c-0.359 0.053-0.839 0.047-0.99-0.011-0.275-0.106-0.383-0.414-0.243-0.684 0.076-0.148 0.264-0.269 0.544-0.351 0.137-0.040 0.726-0.137 0.86-0.142l0.058-0.003v0.578zM16.815 13.322c-0.626 0.026-1.56 0.177-2.222 0.354l-0.1 0.026v5.223h1.742l0.005-2.053 0.008-2.050 0.185-0.050c0.132-0.034 0.285-0.050 0.541-0.053 0.322-0.003 0.37 0.003 0.496 0.061 0.171 0.076 0.28 0.198 0.34 0.377 0.042 0.127 0.047 0.303 0.055 1.953l0.008 1.816h1.715l-0.011-2.064c-0.008-1.855-0.013-2.085-0.053-2.235-0.079-0.298-0.198-0.499-0.414-0.718-0.338-0.34-0.792-0.517-1.486-0.575-0.322-0.026-0.414-0.029-0.81-0.011zM28.412 13.343c-1.016 0.185-1.744 0.794-2.05 1.723-0.145 0.435-0.185 0.744-0.169 1.296 0.011 0.33 0.029 0.53 0.066 0.692 0.216 0.921 0.789 1.567 1.644 1.858 0.731 0.251 1.739 0.209 2.404-0.1 0.85-0.39 1.37-1.156 1.496-2.196 0.148-1.203-0.251-2.291-1.032-2.829-0.34-0.235-0.612-0.346-1.058-0.433-0.306-0.061-1.003-0.066-1.301-0.011zM29.383 14.755c0.28 0.103 0.491 0.375 0.607 0.778 0.053 0.182 0.061 0.272 0.061 0.647 0 0.372-0.008 0.464-0.061 0.641-0.116 0.406-0.293 0.644-0.581 0.779-0.129 0.061-0.185 0.071-0.401 0.071-0.214 0-0.272-0.011-0.396-0.069-0.285-0.132-0.456-0.346-0.575-0.705-0.090-0.274-0.114-0.91-0.047-1.235 0.079-0.377 0.237-0.652 0.478-0.816 0.256-0.177 0.599-0.211 0.916-0.092zM23.453 13.346c-0.694 0.074-1.214 0.201-1.668 0.409-1.082 0.496-1.644 1.399-1.644 2.636 0 1.214 0.554 2.093 1.531 2.433 0.554 0.193 1.301 0.201 1.829 0.018 0.129-0.045 0.238-0.076 0.243-0.071 0.021 0.021-0.040 0.52-0.082 0.655-0.135 0.451-0.404 0.707-0.881 0.837-0.245 0.069-1.079 0.069-1.399 0-0.28-0.058-0.668-0.185-0.916-0.298l-0.193-0.087v1.599l0.311 0.095c0.528 0.161 0.974 0.23 1.544 0.23 1.301 0.003 2.227-0.398 2.771-1.198 0.243-0.359 0.399-0.815 0.473-1.396 0.037-0.296 0.045-3.346 0.011-4.053l-0.018-0.378 0.203 0.008 0.206 0.011 0.288-0.602c0.158-0.33 0.282-0.607 0.277-0.615-0.024-0.021-0.549-0.116-0.955-0.171-0.296-0.040-0.583-0.055-1.111-0.063-0.391-0.003-0.76-0.003-0.818 0.003zM23.714 15.13c0.008 0.238 0.021 0.86 0.029 1.385l0.016 0.955-0.1 0.027c-0.39 0.105-0.776 0.105-1.045 0.005-0.449-0.172-0.676-0.557-0.699-1.182-0.018-0.523 0.082-0.858 0.343-1.132 0.288-0.304 0.731-0.467 1.304-0.483l0.137-0.003 0.016 0.428zM6.655 15.447c0 2.99-0.037 3.381-0.362 4.014-0.203 0.396-0.578 0.726-1.14 1.008-0.143 0.071-0.187 0.103-0.158 0.119 0.021 0.013 0.383 0.185 0.802 0.383l0.765 0.362 0.161-0.082c1.024-0.53 1.488-1.272 1.621-2.602 0.018-0.174 0.037-1.264 0.045-2.752l0.016-2.46h-1.75v2.011z"></path></svg>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-slate-900">Django + Python</h4>
-                        <p class="text-slate-600 text-sm">The backbone of the application. Django's ORM handles all database operations, while its built-in auth system provided a secure foundation for user management.</p>
+                        <p class="text-slate-600 text-sm">The backbone of the application. A custom User model extending AbstractUser provides full control over authentication, economy fields, and social counters. Django's ORM handles all relational database operations.</p>
                     </div>
                 </div>
 
-                <div class="reveal stagger-2 flex items-center gap-6 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <div class="reveal stagger-2 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-slate-900">Django Channels + WebSockets</h4>
-                        <p class="text-slate-600 text-sm">Extends Django to handle WebSockets for real-time chat. Redis acts as the channel layer, enabling message broadcasting across multiple workers.</p>
+                        <p class="text-slate-600 text-sm">Extends Django to handle WebSockets for real-time chat. Redis acts as the channel layer, enabling message broadcasting across multiple workers and connections.</p>
                     </div>
                 </div>
 
-                <div class="reveal stagger-3 flex items-center gap-6 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center shrink-0">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                <div class="reveal stagger-3 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-indigo-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-slate-900">PostgreSQL</h4>
-                        <p class="text-slate-600 text-sm">Relational database with JSONB fields for flexible metadata storage. Proper indexing on foreign keys ensures the follow system and feed queries remain fast.</p>
+                        <p class="text-slate-600 text-sm">Relational database with carefully normalized models. Proper indexing on foreign keys and denormalized counter fields ensures the follow system, gravity feed, and coin transactions remain fast at scale.</p>
                     </div>
                 </div>
 
-                <div class="reveal stagger-4 flex items-center gap-6 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="w-16 h-16 bg-cyan-100 rounded-xl flex items-center justify-center shrink-0">
-                        <svg class="w-8 h-8" viewBox="0 0 32 32" fill="none"><path d="M9,13.7q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q11.1,10.9,9,13.7ZM2,22.1q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q4.1,19.3,2,22.1Z" style="fill:#44a8b3"></path></svg>
+                <div class="reveal stagger-4 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-900">Redis</h4>
+                        <p class="text-slate-600 text-sm">Dual-purpose: serves as the Django Channels layer backend for WebSocket message routing, and as a fast cache for online user presence tracking with automatic TTL expiration.</p>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-5 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-yellow-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-900">Celery</h4>
+                        <p class="text-slate-600 text-sm">Background task queue for link preview generation, email notifications, gravity feed score recomputation, and media cleanup. Keeps web workers responsive by offloading heavy I/O.</p>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-1 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-cyan-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" viewBox="0 0 32 32" fill="none"><path d="M9,13.7q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q11.1,10.9,9,13.7ZM2,22.1q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q4.1,19.3,2,22.1Z" style="fill:#44a8b3"></path></svg>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-slate-900">Tailwind CSS + Vanilla JS</h4>
-                        <p class="text-slate-600 text-sm">Utility-first CSS for rapid UI development. No framework bloat — just clean, semantic HTML with Tailwind classes and vanilla JavaScript for interactivity.</p>
+                        <p class="text-slate-600 text-sm">Utility-first CSS for rapid UI development. No framework bloat — just clean, semantic HTML with Tailwind classes and vanilla JavaScript for interactivity and AJAX.</p>
                     </div>
                 </div>
 
-                <div class="reveal stagger-5 flex items-center gap-6 p-6 bg-slate-50 rounded-xl border border-slate-100">
-                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                <div class="reveal stagger-2 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
                     </div>
                     <div>
                         <h4 class="text-lg font-bold text-slate-900">Render</h4>
-                        <p class="text-slate-600 text-sm">Cloud hosting with auto-deploy from Git. Render's native WebSocket support made it the perfect choice for a real-time application without managing infrastructure.</p>
+                        <p class="text-slate-600 text-sm">Hosted on Render's paid tier for zero cold-start latency and guaranteed uptime. Native WebSocket support and auto-deploy from Git make it the perfect platform for this real-time application.</p>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-3 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-sky-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-900">Cloudinary</h4>
+                        <p class="text-slate-600 text-sm">Cloud-based media management for profile pictures and post images. Combined with server-side downscaling, it keeps storage costs low while delivering optimized assets via CDN.</p>
+                    </div>
+                </div>
+
+                <div class="reveal stagger-4 flex items-center gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-xl border border-slate-100">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gray-100 rounded-xl flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path></svg>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-900">OAuth 2.0 (GitHub + Google)</h4>
+                        <p class="text-slate-600 text-sm">Authentication is fully delegated to GitHub and Google via OAuth 2.0. No passwords are stored locally, removing an entire attack surface and streamlining onboarding.</p>
                     </div>
                 </div>
             </div>
@@ -494,32 +768,36 @@
     </section>
 
     <!-- Results -->
-    <section class="py-20 px-6 bg-slate-900 text-white">
+    <section class="py-20 px-4 sm:px-6 bg-slate-900 text-white">
         <div class="max-w-4xl mx-auto">
             <div class="reveal">
                 <h2 class="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-3">06. Results & Lessons</h2>
-                <h3 class="text-3xl md:text-4xl font-bold mb-6">What I Learned</h3>
+                <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6">What I Learned</h3>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mt-10">
+            <div class="grid sm:grid-cols-2 gap-6 sm:gap-8 mt-10">
                 <div class="reveal stagger-1 bg-slate-800/50 border border-slate-700 rounded-xl p-6">
                     <h4 class="text-xl font-bold text-white mb-3">Technical Growth</h4>
                     <ul class="space-y-3 text-slate-300 text-sm">
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Mastered Django Channels and WebSocket protocol</span>
+                            <span>Mastered Django Channels, WebSockets, and Redis channel layers</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Learned to design and balance a virtual economy</span>
+                            <span>Learned to design and balance a virtual economy with atomic transactions</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Deepened understanding of database concurrency</span>
+                            <span>Deepened understanding of database concurrency and F() expressions</span>
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-green-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                            <span>Built production-grade deployment pipelines</span>
+                            <span>Built production-grade background task pipelines with Celery</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-green-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            <span>Implemented OAuth-only auth and custom user models for flexibility</span>
                         </li>
                     </ul>
                 </div>
@@ -541,7 +819,11 @@
                         </li>
                         <li class="flex items-start gap-2">
                             <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                            <span>Hosting constraints force creative optimization</span>
+                            <span>Gravity feeds balance quality and recency better than chronology</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-5 h-5 text-blue-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                            <span>Removing password storage entirely is liberating for security</span>
                         </li>
                     </ul>
                 </div>
@@ -550,11 +832,11 @@
     </section>
 
     <!-- Next Steps / CTA -->
-    <section class="py-20 px-6 bg-white border-t border-slate-100">
+    <section class="py-20 px-4 sm:px-6 bg-white border-t border-slate-100">
         <div class="max-w-4xl mx-auto text-center reveal">
-            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Want to See It in Action?</h2>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-4">Want to See It in Action?</h2>
             <p class="text-slate-600 text-lg mb-8 max-w-2xl mx-auto">
-                SyntaxAndStories is live and growing. Create an account, write your first post, earn some coins, and join the conversation.
+                SyntaxAndStories is live and growing. Sign in with GitHub or Google, write your first post, earn some coins, and join the conversation.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="https://syntaxandstories.dev" target="_blank" class="inline-flex items-center gap-2 bg-blue-600 text-white font-bold px-8 py-4 rounded-xl hover:bg-blue-700 transition-all duration-300 shadow-xl shadow-blue-500/25">
@@ -569,9 +851,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
-            <div class="md:col-span-2">
+    <footer class="bg-slate-900 text-slate-400 py-12 px-4 sm:px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="sm:col-span-2 md:col-span-2">
                 <a href="/index.html" class="text-white font-mono font-bold text-xl tracking-tighter mb-4 inline-block">
                     <span class="text-blue-500">[</span>JA<span class="text-blue-500">]</span>
                 </a>
