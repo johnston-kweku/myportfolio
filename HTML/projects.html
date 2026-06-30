@@ -5,15 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Featured Projects | Johnston Kweku Abubakar | Full-Stack Software Engineer</title>
     <meta name="title" content="Featured Projects | Johnston Kweku Abubakar | Full-Stack Software Engineer">
-    <meta name="description" content="Explore a curated selection of scalable backends and resilient distributed systems engineered by Johnston Kweku Abubakar. Featuring SyntaxAndStories (SAS), BizChat, and Pharmacy POS.">
-    <meta name="keywords" content="Johnston Kweku Abubakar Projects, SyntaxAndStories, BizChat, Pharmacy POS, Django Projects, Python Portfolio, Scalable Systems Portfolio">
+    <meta name="description" content="Explore a curated selection of scalable backends and resilient distributed systems engineered by Johnston Kweku Abubakar. Featuring SyntaxAndStories (SAS), PharmaFlow, BizChat, and more.">
+    <meta name="keywords" content="Johnston Kweku Abubakar Projects, SyntaxAndStories, PharmaFlow, BizChat, EduTrack, Chronos, LearnMate, Django Projects, Python Portfolio, Scalable Systems Portfolio">
     <meta name="author" content="Johnston Kweku Abubakar">
     <meta name="robots" content="index, follow">
 
-    <!-- Canonical Link -->
     <link rel="canonical" href="https://johnstonabu.netlify.app/HTML/projects.html">
 
-    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://johnstonabu.netlify.app/HTML/projects.html">
     <meta property="og:title" content="Featured Projects | Johnston Kweku Abubakar">
@@ -21,226 +19,462 @@
     <meta property="og:image" content="https://johnstonabu.netlify.app/assets/images/image.jpeg">
 
     <link rel="stylesheet" href="/css/src/output.css">
-    <link rel="shortcut icon" href="/assets/images/portfolio-briefcase-svgrepo-com (1).svg" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="/assets/images/image.jpeg" type="image/x-icon">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+        .stagger-7 { transition-delay: 0.7s; }
+
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: ''; position: absolute; bottom: -2px; left: 50%; width: 0; height: 2px;
+            background: #3b82f6; transition: all 0.3s ease; transform: translateX(-50%);
+        }
+        .nav-link:hover::after { width: 80%; }
+
+        .project-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+    </style>
+    <noscript>
+        <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+    </noscript>
 </head>
-<body class="bg-linear-to-r from-sky-50 to-sky-100 bg-grid pt-20">
-    <nav class="w-full fixed top-0 z-50 left-0 bg-white/60 backdrop-blur-xl border-b border-gray-100 flex items-center justify-between px-6 py-4">
-        <div class="text-gray-900 font-mono font-bold text-xl tracking-tighter">
-            <span class="text-blue-600">[</span>JA<span class="text-blue-600">]</span> Johnston Abubakar
-        </div>
+<body class="bg-slate-50 text-slate-900 antialiased">
 
-        <!-- Desktop Navigation -->
-        <ul class="hidden md:flex gap-1 items-center text-gray-600 font-medium text-sm">
-            <li><a href="/index.html" class="hover:bg-gray-50 px-4 py-2 rounded-full transition-all duration-300">Home</a></li>
-            <li><a href="/index.html#approach" class="hover:bg-gray-50 px-4 py-2 rounded-full transition-all duration-300">Approach</a></li>
-            <li><a href="/HTML/projects.html" class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-bold">Projects</a></li>
-            <li><a href="/HTML/contact.html" class="hover:bg-gray-50 px-4 py-2 rounded-full transition-all duration-300">Contact</a></li>
-        </ul>
-
-        <div class="flex items-center gap-4">
-            <a href="#" class="hidden sm:block bg-gray-900 text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-blue-700 transition-all duration-300">
-                Get in Touch
+    <nav class="w-full fixed top-0 z-50 left-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="/index.html" class="text-slate-900 font-mono font-bold text-xl tracking-tighter hover:scale-105 transition-transform">
+                <span class="text-blue-600">[</span>JA<span class="text-blue-600">]</span>
             </a>
-            
-            <!-- Mobile Menu Toggle -->
-            <button id="menu-toggle" class="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-        </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-b border-gray-100 flex-col p-6 gap-4 shadow-2xl animate-reveal md:hidden">
-            <a href="/index.html" class="text-gray-600 font-medium text-lg">Home</a>
-            <a href="/index.html#approach" class="text-gray-600 font-medium text-lg">Approach</a>
-            <a href="/HTML/projects.html" class="text-blue-700 font-bold text-lg">Projects</a>
-            <a href="/HTML/contact.html" class="text-gray-600 font-medium text-lg">Contact</a>
-            <hr class="border-gray-100">
-            <a href="#" class="bg-gray-900 text-white text-center py-3 rounded-xl font-bold">Get in Touch</a>
+            <ul class="hidden md:flex gap-8 items-center text-slate-600 font-medium text-sm">
+                <li><a href="/index.html" class="nav-link hover:text-slate-900 transition-colors">Home</a></li>
+                <li><a href="/index.html#about" class="nav-link hover:text-slate-900 transition-colors">About</a></li>
+                <li><a href="/index.html#philosophy" class="nav-link hover:text-slate-900 transition-colors">Approach</a></li>
+                <li><a href="/HTML/projects.html" class="nav-link text-blue-600 font-bold">Projects</a></li>
+                <li><a href="/HTML/contact.html" class="nav-link hover:text-slate-900 transition-colors">Contact</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <a href="/HTML/contact.html" class="hidden sm:inline-flex items-center gap-2 bg-slate-900 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/20">
+                    Hire Me
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+                <button id="menu-toggle" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-b border-slate-200 flex-col p-6 gap-4 shadow-2xl md:hidden">
+                <a href="/index.html" class="text-slate-600 font-medium text-lg">Home</a>
+                <a href="/index.html#about" class="text-slate-600 font-medium text-lg">About</a>
+                <a href="/index.html#philosophy" class="text-slate-600 font-medium text-lg">Approach</a>
+                <a href="/HTML/projects.html" class="text-blue-600 font-bold text-lg">Projects</a>
+                <a href="/HTML/contact.html" class="text-slate-600 font-medium text-lg">Contact</a>
+                <hr class="border-slate-100">
+                <a href="/HTML/contact.html" class="bg-slate-900 text-white text-center py-3 rounded-xl font-bold">Get in Touch</a>
+            </div>
         </div>
     </nav>
 
-    <div class="w-full md:w-10/12 mx-auto flex animate-reveal opacity-0 translate-y-12 flex-col items-start px-6">
-        <span class="flex items-center px-2 gap-2 py-1">
-            <span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span>
-            <p class="text-blue-700 text-sm font-semibold">Portfolio 2026</p>
-        </span>
-        <h1 class="text-4xl md:text-5xl font-bold">
-            Featured Work
-        </h1>
-        <p class="text-wrap my-5 text-gray-600">
-            A curated selection of architeture-first applications,focusing 
-            on scalable systems, real-time communication, and precision business logic
-        </p>
-    </div>
-
-    <div class="w-full animate-reveal px-4 sm:px-6 gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        <div class="bg-white shadow-2xl sm:col-span-2 group perspective-near mx-auto my-8 rounded-2xl group-hover:translate-z-20 w-full">
-            <div class="rounded-t-2xl transform-3d transition-all duration-500 overflow-hidden">
-                <img src="/assets/images/sas.jpg" class="w-full group-hover:scale-105 object-cover transition-all duration-500 h-64 md:h-96 rounded-t-2xl" alt="SyntaxAndStories (SAS) Social Blogging Platform by Johnston Kweku Abubakar">
+    <!-- Header -->
+    <section class="pt-32 pb-12 px-6 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto reveal">
+            <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-semibold mb-6">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                Portfolio 2026
             </div>
-            <div class="px-8 py-6 w-full">
-                <span class="flex items-center justify-between">
-                    <h2 class="text-3xl font-bold">
-                        SyntaxAndStories (SAS)
-                    </h2>
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff" stroke-width="0.00024000000000000003"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.4 4h17.2A2.4 2.4 0 0 1 23 6.4v11.2a2.4 2.4 0 0 1-2.4 2.4H3.4A2.4 2.4 0 0 1 1 17.6V6.4A2.4 2.4 0 0 1 3.4 4Zm.893 3.293a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414l-4 4a1 1 0 0 1-1.414-1.414L7.586 12 4.293 8.707a1 1 0 0 1 0-1.414ZM10 16a1 1 0 0 1 1-1h8a1 1 0 1 1 0 2h-8a1 1 0 0 1-1-1Z" fill="#2237d3"></path></g></svg>
-                </span>
-                <div class="flex gap-2 py-4">
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">
-                        SOCIAL PLATFORM
-                    </p>
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">
-                        FLAGSHIP
-                    </p>
+            <h1 class="text-5xl md:text-6xl font-bold text-slate-900 mb-4">Featured Work</h1>
+            <p class="text-lg text-slate-600 max-w-2xl leading-relaxed">
+                A curated selection of architecture-first applications, focusing on scalable systems, real-time communication, and precision business logic. Every project is a lesson in resilience.
+            </p>
+        </div>
+    </section>
+
+    <!-- Fullstack Projects -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-10 reveal">
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path></svg>
                 </div>
-                <div class="text-wrap text-gray-500 py-3">
-                    <p class="leading-relaxed">
-                        A comprehensive social blogging ecosystem featuring high-performance AJAX interactions and complex relational Follow system. Engineered for community engagement and technical storytelling.
-                    </p>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Full-Stack Applications</h2>
+                    <p class="text-sm text-slate-500">End-to-end systems built with Django, Python, and modern frontend tooling.</p>
                 </div>
-                <div class="flex items-center justify-center">
-                    <div class="w-full flex -space-x-2">
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-200">JS</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-100">PY</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-50">SQL</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- SyntaxAndStories -->
+                <div class="reveal stagger-1 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/0f172a/3b82f6?text=SyntaxAndStories" alt="SyntaxAndStories" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4 flex gap-2">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">FLAGSHIP</span>
+                            <span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">LIVE</span>
+                        </div>
+                        <div class="absolute bottom-4 right-4">
+                            <a href="https://syntaxandstories.dev" target="_blank" class="w-10 h-10 bg-white/20 backdrop-blur rounded-full flex items-center justify-center hover:bg-white/40 transition-colors">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                        </div>
                     </div>
-                    <a href="" class="flex gap-1 items-center w-fit justify-center text-blue-800 font-semi-bold">
-                        <p class="text-sm font-bold text-nowrap">View Case Study </p>
-                        <svg class="w-6 h-6 hover:translate-x-2 tansition-all duration-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.2929 4.29289C12.6834 3.90237 13.3166 3.90237 13.7071 4.29289L20.7071 11.2929C21.0976 11.6834 21.0976 12.3166 20.7071 12.7071L13.7071 19.7071C13.3166 20.0976 12.6834 20.0976 12.2929 19.7071C11.9024 19.3166 11.9024 18.6834 12.2929 18.2929L17.5858 13H4C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H17.5858L12.2929 5.70711C11.9024 5.31658 11.9024 4.68342 12.2929 4.29289Z" fill="#145fd7"></path> </g></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white shadow-2xl col-span-1 group perspective-dramatic mx-auto my-8 rounded-2xl group-hover:translate-z-20 w-full">
-            <div class="rounded-t-2xl transform-3d transition-all duration-500 overflow-hidden">
-                <img src="/assets/images/biz.jpeg" class="w-full group-hover:scale-105 object-cover transition-all duration-500 rounded-t-2xl h-64 md:h-96" alt="BizChat Real-time Communication Application by Johnston Kweku Abubakar">
-            </div>
-            <div class="px-8 py-6 w-full">
-                <span class="flex items-center justify-between">
-                    <h2 class="text-3xl font-bold">
-                        BizChat
-                    </h2>
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M8 9H16" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M8 12.5H13.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"></path> <path d="M13.0867 21.3877L13.7321 21.7697L13.0867 21.3877ZM13.6288 20.4718L12.9833 20.0898L13.6288 20.4718ZM10.3712 20.4718L9.72579 20.8539H9.72579L10.3712 20.4718ZM10.9133 21.3877L11.5587 21.0057L10.9133 21.3877ZM1.25 10.5C1.25 10.9142 1.58579 11.25 2 11.25C2.41421 11.25 2.75 10.9142 2.75 10.5H1.25ZM3.07351 15.6264C2.915 15.2437 2.47627 15.062 2.09359 15.2205C1.71091 15.379 1.52918 15.8177 1.68769 16.2004L3.07351 15.6264ZM7.78958 18.9915L7.77666 19.7413L7.78958 18.9915ZM5.08658 18.6194L4.79957 19.3123H4.79957L5.08658 18.6194ZM21.6194 15.9134L22.3123 16.2004V16.2004L21.6194 15.9134ZM16.2104 18.9915L16.1975 18.2416L16.2104 18.9915ZM18.9134 18.6194L19.2004 19.3123H19.2004L18.9134 18.6194ZM19.6125 2.7368L19.2206 3.37628L19.6125 2.7368ZM21.2632 4.38751L21.9027 3.99563V3.99563L21.2632 4.38751ZM4.38751 2.7368L3.99563 2.09732V2.09732L4.38751 2.7368ZM2.7368 4.38751L2.09732 3.99563H2.09732L2.7368 4.38751ZM9.40279 19.2098L9.77986 18.5615L9.77986 18.5615L9.40279 19.2098ZM13.7321 21.7697L14.2742 20.8539L12.9833 20.0898L12.4412 21.0057L13.7321 21.7697ZM9.72579 20.8539L10.2679 21.7697L11.5587 21.0057L11.0166 20.0898L9.72579 20.8539ZM12.4412 21.0057C12.2485 21.3313 11.7515 21.3313 11.5587 21.0057L10.2679 21.7697C11.0415 23.0767 12.9585 23.0767 13.7321 21.7697L12.4412 21.0057ZM10.5 2.75H13.5V1.25H10.5V2.75ZM21.25 10.5V11.5H22.75V10.5H21.25ZM7.8025 18.2416C6.54706 18.2199 5.88923 18.1401 5.37359 17.9265L4.79957 19.3123C5.60454 19.6457 6.52138 19.7197 7.77666 19.7413L7.8025 18.2416ZM1.68769 16.2004C2.27128 17.6093 3.39066 18.7287 4.79957 19.3123L5.3736 17.9265C4.33223 17.4951 3.50486 16.6678 3.07351 15.6264L1.68769 16.2004ZM21.25 11.5C21.25 12.6751 21.2496 13.5189 21.2042 14.1847C21.1592 14.8438 21.0726 15.2736 20.9265 15.6264L22.3123 16.2004C22.5468 15.6344 22.6505 15.0223 22.7007 14.2868C22.7504 13.5581 22.75 12.6546 22.75 11.5H21.25ZM16.2233 19.7413C17.4786 19.7197 18.3955 19.6457 19.2004 19.3123L18.6264 17.9265C18.1108 18.1401 17.4529 18.2199 16.1975 18.2416L16.2233 19.7413ZM20.9265 15.6264C20.4951 16.6678 19.6678 17.4951 18.6264 17.9265L19.2004 19.3123C20.6093 18.7287 21.7287 17.6093 22.3123 16.2004L20.9265 15.6264ZM13.5 2.75C15.1512 2.75 16.337 2.75079 17.2619 2.83873C18.1757 2.92561 18.7571 3.09223 19.2206 3.37628L20.0044 2.09732C19.2655 1.64457 18.4274 1.44279 17.4039 1.34547C16.3915 1.24921 15.1222 1.25 13.5 1.25V2.75ZM22.75 10.5C22.75 8.87781 22.7508 7.6085 22.6545 6.59611C22.5572 5.57256 22.3554 4.73445 21.9027 3.99563L20.6237 4.77938C20.9078 5.24291 21.0744 5.82434 21.1613 6.73809C21.2492 7.663 21.25 8.84876 21.25 10.5H22.75ZM19.2206 3.37628C19.7925 3.72672 20.2733 4.20752 20.6237 4.77938L21.9027 3.99563C21.4286 3.22194 20.7781 2.57144 20.0044 2.09732L19.2206 3.37628ZM10.5 1.25C8.87781 1.25 7.6085 1.24921 6.59611 1.34547C5.57256 1.44279 4.73445 1.64457 3.99563 2.09732L4.77938 3.37628C5.24291 3.09223 5.82434 2.92561 6.73809 2.83873C7.663 2.75079 8.84876 2.75 10.5 2.75V1.25ZM2.75 10.5C2.75 8.84876 2.75079 7.663 2.83873 6.73809C2.92561 5.82434 3.09223 5.24291 3.37628 4.77938L2.09732 3.99563C1.64457 4.73445 1.44279 5.57256 1.34547 6.59611C1.24921 7.6085 1.25 8.87781 1.25 10.5H2.75ZM3.99563 2.09732C3.22194 2.57144 2.57144 3.22194 2.09732 3.99563L3.37628 4.77938C3.72672 4.20752 4.20752 3.72672 4.77938 3.37628L3.99563 2.09732ZM11.0166 20.0898C10.8136 19.7468 10.6354 19.4441 10.4621 19.2063C10.2795 18.9559 10.0702 18.7304 9.77986 18.5615L9.02572 19.8582C9.07313 19.8857 9.13772 19.936 9.24985 20.0898C9.37122 20.2564 9.50835 20.4865 9.72579 20.8539L11.0166 20.0898ZM7.77666 19.7413C8.21575 19.7489 8.49387 19.7545 8.70588 19.7779C8.90399 19.7999 8.98078 19.832 9.02572 19.8582L9.77986 18.5615C9.4871 18.3912 9.18246 18.3215 8.87097 18.287C8.57339 18.2541 8.21375 18.2487 7.8025 18.2416L7.77666 19.7413ZM14.2742 20.8539C14.4916 20.4865 14.6287 20.2564 14.7501 20.0898C14.8622 19.936 14.9268 19.8857 14.9742 19.8582L14.2201 18.5615C13.9298 18.7304 13.7204 18.9559 13.5379 19.2063C13.3646 19.4441 13.1864 19.7468 12.9833 20.0898L14.2742 20.8539ZM16.1975 18.2416C15.7862 18.2487 15.4266 18.2541 15.129 18.287C14.8175 18.3215 14.5129 18.3912 14.2201 18.5615L14.9742 19.8582C15.0192 19.832 15.096 19.7999 15.2941 19.7779C15.5061 19.7545 15.7842 19.7489 16.2233 19.7413L16.1975 18.2416Z" fill="#1C274C"></path> </g></svg>
-                </span>
-                <div class="flex gap-2 py-4">
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">
-                        CHAT APP
-                    </p>
-                </div>
-                <div class="selection:bg-blue-200 text-gray-500 py-3">
-                    <p class="leading-relaxed">
-                        Real-time communication architecture with secure email-based onboarding and low-latency delivery.
-                    </p>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white shadow-2xl col-span-1 group perspective-dramatic mx-auto my-8 rounded-2xl group-hover:translate-z-20 w-full">
-            <div class="rounded-t-2xl transform-3d transition-all duration-500 overflow-hidden">
-                <img src="/assets/images/POS.jpeg" class="w-full group-hover:scale-105 object-cover transition-all duration-500 rounded-t-2xl h-64 md:h-96" alt="Pharmacy POS">
-            </div>
-            <div class="px-8 py-6 w-full">
-                <span class="flex items-center justify-between">
-                    <h2 class="text-3xl font-bold">Pharmacy POS</h2>
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </span>
-                <div class="flex gap-2 py-4">
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">INVENTORY MGMT</p>
-                </div>
-                <div class="text-gray-500 py-3">
-                    <p class="leading-relaxed">A robust Point of Sale system tailored for pharmaceutical inventory management, featuring expiry alerts and real-time stock tracking.</p>
-                </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex -space-x-2">
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-200">PY</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-100">SQL</span>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">SyntaxAndStories</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">An Africa-focused developer blogging platform with a coin economy, reward system, and real-time chat. Built to center African developer voices in the global tech conversation.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">WebSockets</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">PostgreSQL</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Tailwind</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-600 text-white">JS</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                            <div class="flex gap-3">
+                                <a href="https://syntaxandstories.dev" target="_blank" class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors inline-flex items-center gap-1">
+                                    Live App <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                </a>
+                                <a href="/HTML/sas-case-study.html" class="text-violet-600 font-semibold text-sm hover:text-violet-700 transition-colors inline-flex items-center gap-1">
+                                    Case Study <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a href="#" class="text-blue-800 font-bold text-sm">Case Study →</a>
                 </div>
-            </div>
-        </div>
 
-        <div class="bg-white shadow-2xl col-span-1 group perspective-near mx-auto my-8 rounded-2xl group-hover:translate-z-20 w-full">
-            <div class="rounded-t-2xl transform-3d transition-all duration-500 overflow-hidden">
-                <img src="/assets/images/notes.jpg" class="w-full group-hover:scale-105 object-cover transition-all duration-500 rounded-t-2xl h-64 md:h-96" alt="Notes - Professional Note-Taking Ecosystem by Johnston Kweku Abubakar">
-            </div>
-            <div class="px-8 py-6 w-full">
-                <span class="flex items-center justify-between">
-                    <h2 class="text-3xl font-bold">Notes</h2>
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/><path d="M18.5 2.5a2.121 2.121 0 113 3L12 15l-4 1 1-4 9.5-9.5z" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </span>
-                <div class="flex gap-2 py-4">
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">FULL-STACK PRODUCTIVITY</p>
-                </div>
-                <div class="text-gray-500 py-3">
-                    <p class="leading-relaxed">A professional note-taking ecosystem built with Django and PostgreSQL. Features secure user accounts, markdown support, and high-performance search.</p>
-                </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex -space-x-2">
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-200">PY</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-100">SQL</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-50">JS</span>
+                <!-- PharmaFlow -->
+                <div class="reveal stagger-2 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/1e1b4b/8b5cf6?text=PharmaFlow" alt="PharmaFlow" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-violet-600 text-white text-xs font-bold px-3 py-1 rounded-full">RBAC</span>
+                        </div>
                     </div>
-                    <a href="#" class="text-blue-800 font-bold text-sm">Case Study →</a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">PharmaFlow</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">A robust RBAC inventory management system tailored for pharmaceutical operations. Features expiry alerts, real-time stock tracking, and role-based access control.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">RBAC</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Inventory</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Reports</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="bg-white shadow-2xl col-span-1 group perspective-dramatic mx-auto my-8 rounded-2xl group-hover:translate-z-20 w-full">
-            <div class="rounded-t-2xl transform-3d transition-all duration-500 overflow-hidden">
-                <img src="/assets/images/learning-log.jpg" class="w-full group-hover:scale-105 object-cover transition-all duration-500 rounded-t-2xl h-64 md:h-96" alt="Learning Log">
-            </div>
-            <div class="px-8 py-6 w-full">
-                <span class="flex items-center justify-between">
-                    <h2 class="text-3xl font-bold">Learning Log</h2>
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </span>
-                <div class="flex gap-2 py-4">
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">FULL-STACK KNOWLEDGE MGMT</p>
-                </div>
-                <div class="text-gray-500 py-3">
-                    <p class="leading-relaxed">A dedicated platform for documenting technical growth. Built as a full-stack Django application to manage structured learning paths and personal development logs.</p>
-                </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex -space-x-2">
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-200">PY</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-100">SQL</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-50">JS</span>
+                <!-- BizChat -->
+                <div class="reveal stagger-3 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/0c4a6e/0ea5e9?text=BizChat" alt="BizChat" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full">REAL-TIME</span>
+                        </div>
                     </div>
-                    <a href="#" class="text-blue-800 font-bold text-sm">Case Study →</a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">BizChat</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">Business chat application with AJAX polling architecture. Features secure email-based onboarding, low-latency message delivery, and threaded conversations.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">AJAX</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Real-time</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Auth</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-600 text-white">JS</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="bg-white shadow-2xl col-span-1 group perspective-near mx-auto my-8 rounded-2xl group-hover:translate-z-20 w-full">
-            <div class="rounded-t-2xl transform-3d transition-all duration-500 overflow-hidden">
-                <img src="/assets/images/chronos.jpg" class="w-full group-hover:scale-105 object-cover transition-all duration-500 rounded-t-2xl h-64 md:h-96" alt="Chronos Task Manager">
-            </div>
-            <div class="px-8 py-6 w-full">
-                <span class="flex items-center justify-between">
-                    <h2 class="text-3xl font-bold">Chronos</h2>
-                    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="#1C274C" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </span>
-                <div class="flex gap-2 py-4">
-                    <p class="text-blue-600 text-[10px] px-2 py-1 rounded-2xl bg-blue-50">FUTURISTIC TASK MGMT</p>
-                </div>
-                <div class="text-gray-500 py-3">
-                    <p class="leading-relaxed">A high-end task orchestration engine. Features interactive time-tracking, data visualization charts, and a futuristic UI for mastering complex workflows.</p>
-                </div>
-                <div class="flex items-center justify-between">
-                    <div class="flex -space-x-2">
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-200">PY</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-100">JS</span>
-                        <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-50">SQL</span>
+                <!-- EduTrack -->
+                <div class="reveal stagger-4 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/14532d/22c55e?text=EduTrack" alt="EduTrack" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">EDUCATION</span>
+                        </div>
                     </div>
-                    <a href="#" class="text-blue-800 font-bold text-sm">Case Study →</a>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">EduTrack</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">A comprehensive school management system with RBAC. Handles student records, grading, attendance tracking, and administrative workflows.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">RBAC</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Dashboard</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chronos -->
+                <div class="reveal stagger-5 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/312e81/818cf8?text=Chronos" alt="Chronos" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full">FUTURISTIC</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Chronos</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">A high-end task orchestration engine with interactive time-tracking, data visualization charts, and a futuristic UI designed for mastering complex workflows.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Charts</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Timer</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">UI/UX</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-600 text-white">JS</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LearnMate -->
+                <div class="reveal stagger-6 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/7c2d12/ea580c?text=LearnMate" alt="LearnMate" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full">LEARNING</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">LearnMate</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">A dedicated learning log platform for documenting technical growth. Manages structured learning paths, progress tracking, and personal development logs.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">PostgreSQL</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Progress</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-600 text-white">JS</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Note -->
+                <div class="reveal stagger-7 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/3f3f46/a1a1aa?text=Note" alt="Note" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-zinc-600 text-white text-xs font-bold px-3 py-1 rounded-full">PRODUCTIVITY</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Note</h3>
+                        <p class="text-slate-600 text-sm mb-4 leading-relaxed">A professional note-taking ecosystem with secure user accounts, markdown support, and high-performance full-text search capabilities.</p>
+                        <div class="flex flex-wrap gap-2 mb-5">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Search</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Markdown</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div class="flex -space-x-2">
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-800 text-white">PY</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-600 text-white">JS</span>
+                                <span class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-[10px] font-bold bg-slate-400 text-white">SQL</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="/assets/js/index.js"></script>
+    </section>
+
+    <!-- Frontend Projects -->
+    <section class="py-16 px-6 bg-white border-t border-slate-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-center gap-4 mb-10 reveal">
+                <div class="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Frontend Projects</h2>
+                    <p class="text-sm text-slate-500">Interactive UI experiments, games, and landing pages built with vanilla JavaScript and HTML.</p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Scrambler -->
+                <div class="reveal stagger-1 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://placehold.co/600x400/3b0764/a855f7?text=Scrambler" alt="Scrambler" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full">GAME</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Scrambler</h3>
+                        <p class="text-slate-600 text-sm mb-4">A word scramble game with real-time scoring, timer mechanics, and progressive difficulty levels.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">HTML</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">CSS</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Vanilla JS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Peegen -->
+                <div class="reveal stagger-2 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://placehold.co/600x400/0f172a/64748b?text=Peegen" alt="Peegen" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-slate-600 text-white text-xs font-bold px-3 py-1 rounded-full">UTILITY</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">Peegen</h3>
+                        <p class="text-slate-600 text-sm mb-4">A secure password generator with customizable entropy, strength analysis, and copy-to-clipboard functionality.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">HTML</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">CSS</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Vanilla JS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DIS Clinic -->
+                <div class="reveal stagger-3 project-card bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg">
+                    <div class="relative overflow-hidden h-48">
+                        <img src="https://placehold.co/600x400/881337/f43f5e?text=DIS+Clinic" alt="DIS Clinic" class="project-image w-full h-full object-cover transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-full">LANDING</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-slate-900 mb-2">DIS Clinic</h3>
+                        <p class="text-slate-600 text-sm mb-4">A modern, responsive landing page for a healthcare clinic. Features appointment CTAs, service listings, and contact integration.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">HTML</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Tailwind</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1 rounded-md font-mono">Responsive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Have a Project in Mind?</h2>
+            <p class="text-blue-100 text-lg mb-10 max-w-2xl mx-auto">I'm always excited to work on challenging problems. Let's architect something great together.</p>
+            <a href="/HTML/contact.html" class="inline-flex items-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-xl">
+                Start a Conversation
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <a href="/index.html" class="text-white font-mono font-bold text-xl tracking-tighter mb-4 inline-block">
+                    <span class="text-blue-500">[</span>JA<span class="text-blue-500">]</span>
+                </a>
+                <p class="text-slate-500 max-w-sm">Full-Stack Software Engineer crafting resilient, scalable systems with Django and Python. Based in Assin Foso, Ghana.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/index.html" class="hover:text-blue-400 transition-colors">Home</a></li>
+                    <li><a href="/HTML/projects.html" class="hover:text-blue-400 transition-colors">Projects</a></li>
+                    <li><a href="/HTML/contact.html" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Connect</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://github.com/johnston-kweku" target="_blank" class="hover:text-blue-400 transition-colors">GitHub</a></li>
+                    <li><a href="mailto:johnstonkweku@gmail.com" class="hover:text-blue-400 transition-colors">Email</a></li>
+                    <li><span class="text-slate-600">Assin Foso, Ghana</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-600">
+            <p> Johnston Kweku Abubakar. Crafted with Django, Python & Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
-</html>>
 </html>

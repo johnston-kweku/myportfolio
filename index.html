@@ -10,17 +10,14 @@
     <meta name="author" content="Johnston Kweku Abubakar">
     <meta name="robots" content="index, follow">
 
-    <!-- Canonical Link -->
     <link rel="canonical" href="https://johnstonabu.netlify.app/">
 
-    <!-- Open Graph / Facebook / LinkedIn -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://johnstonabu.netlify.app/">
     <meta property="og:title" content="Johnston Kweku Abubakar | Full-Stack Software Engineer">
     <meta property="og:description" content="Architecting scalable backends and resilient distributed systems with Django and Python. View my featured work including SAS and BizChat.">
     <meta property="og:image" content="https://johnstonabu.netlify.app/assets/images/image.jpeg">
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://johnstonabu.netlify.app/">
     <meta property="twitter:title" content="Johnston Kweku Abubakar | Full-Stack Software Engineer">
@@ -29,248 +26,556 @@
 
     <link rel="stylesheet" href="/css/src/output.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="/assets/images/image.jpeg" type="image/x-icon">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.4); }
+        }
+        .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .code-window {
+            background: #0f172a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .skill-bar {
+            height: 4px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+    </style>
     <noscript>
-        <style>
-            .animate-reveal{ opacity: 1 !important; transform: none !important;}
-        </style>
+        <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
     </noscript>
     <meta name="google-site-verification" content="yGbjVUp5-CwvWQ3DqUVPDah5dVvx4306956auSbGWMU" />
 </head>
-<body class="bg-linear-to-r from-sky-50 to-sky-100 bg-grid pt-20">
-    <nav class="w-full fixed top-0 z-50 left-0 bg-white/60 backdrop-blur-xl border-b border-gray-100 flex items-center justify-between px-6 py-4">
-        <div class="text-gray-900 font-mono font-bold text-xl tracking-tighter">
-            <span class="text-blue-600">[</span>JA<span class="text-blue-600">]</span> Johnston Abubakar
-        </div>
+<body class="bg-slate-50 text-slate-900 antialiased">
 
-        <!-- Desktop Navigation -->
-        <ul class="hidden md:flex gap-1 items-center text-gray-600 font-medium text-sm">
-            <li><a href="index.html" class="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-bold">Home</a></li>
-            <li><a href="#approach" class="hover:bg-gray-50 px-4 py-2 rounded-full transition-all duration-300">Approach</a></li>
-            <li><a href="/HTML/projects.html" class="hover:bg-gray-50 px-4 py-2 rounded-full transition-all duration-300">Projects</a></li>
-            <li><a href="/HTML/contact.html" class="hover:bg-gray-50 px-4 py-2 rounded-full transition-all duration-300">Contact</a></li>
-        </ul>
-
-        <div class="flex items-center gap-4">
-            <a href="/HTML/contact.html" class="hidden sm:block bg-gray-900 text-white font-bold px-4 py-2 rounded-full text-xs hover:bg-blue-700 transition-all duration-300">
-                Get in Touch
+    <!-- Navigation -->
+    <nav class="w-full fixed top-0 z-50 left-0 bg-white/80 backdrop-blur-xl border-b border-slate-200/60">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="index.html" class="text-slate-900 font-mono font-bold text-xl tracking-tighter hover:scale-105 transition-transform">
+                <span class="text-blue-600">[</span>JA<span class="text-blue-600">]</span>
             </a>
-            
-            <!-- Mobile Menu Toggle -->
-            <button id="menu-toggle" class="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            </button>
-        </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-b border-gray-100 flex-col p-6 gap-4 shadow-2xl animate-reveal md:hidden">
-            <a href="index.html" class="text-blue-700 font-bold text-lg">Home</a>
-            <a href="#approach" class="text-gray-600 font-medium text-lg">Approach</a>
-            <a href="/HTML/projects.html" class="text-gray-600 font-medium text-lg">Projects</a>
-            <a href="/HTML/contact.html" class="text-gray-600 font-medium text-lg">Contact</a>
-            <hr class="border-gray-100">
-            <a href="#" class="bg-gray-900 text-white text-center py-3 rounded-xl font-bold">Get in Touch</a>
+            <ul class="hidden md:flex gap-8 items-center text-slate-600 font-medium text-sm">
+                <li><a href="index.html" class="nav-link text-blue-600 font-bold">Home</a></li>
+                <li><a href="#about" class="nav-link hover:text-slate-900 transition-colors">About</a></li>
+                <li><a href="#philosophy" class="nav-link hover:text-slate-900 transition-colors">Approach</a></li>
+                <li><a href="/HTML/projects.html" class="nav-link hover:text-slate-900 transition-colors">Projects</a></li>
+                <li><a href="/HTML/contact.html" class="nav-link hover:text-slate-900 transition-colors">Contact</a></li>
+            </ul>
+
+            <div class="flex items-center gap-4">
+                <a href="/HTML/contact.html" class="hidden sm:inline-flex items-center gap-2 bg-slate-900 text-white font-semibold px-5 py-2.5 rounded-full text-sm hover:bg-blue-600 transition-all duration-300 shadow-lg shadow-blue-500/20">
+                    Hire Me
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+
+                <button id="menu-toggle" class="md:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-lg transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-2xl border-b border-slate-200 flex-col p-6 gap-4 shadow-2xl md:hidden">
+                <a href="index.html" class="text-blue-600 font-bold text-lg">Home</a>
+                <a href="#about" class="text-slate-600 font-medium text-lg">About</a>
+                <a href="#philosophy" class="text-slate-600 font-medium text-lg">Approach</a>
+                <a href="/HTML/projects.html" class="text-slate-600 font-medium text-lg">Projects</a>
+                <a href="/HTML/contact.html" class="text-slate-600 font-medium text-lg">Contact</a>
+                <hr class="border-slate-100">
+                <a href="/HTML/contact.html" class="bg-slate-900 text-white text-center py-3 rounded-xl font-bold">Get in Touch</a>
+            </div>
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-linear-to-br from-blue-50 via-white to-violet-50 -z-10"></div>
+        <div class="absolute top-20 right-0 w-96 h-96 bg-blue-200/30 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute bottom-0 left-0 w-72 h-72 bg-violet-200/30 rounded-full blur-3xl -z-10"></div>
 
-    <div class="flex md:flex-row flex-col gap-8 animate-reveal opacity-0 translate-y-12 px-10 mt-12">
-        <div class="w-full md:w-7/12">
-            <span class="bg-blue-200 px-3 py-1 w-fit h-fit rounded-2xl text-[10px] shadow-blue-400 font-normal flex gap-2 items-center"><span class="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping"></span>OPEN FOR PROJECTS & INTERNSHIPS</span>
-            <div class="my-10">
-                <h1 class="text-5xl font-bold text-gray-800 text-wrap">Architecting scalable backends with <span class="text-blue-500 italic">Django & Python</span></h1>
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div class="reveal">
+                <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-100 text-blue-700 px-4 py-2 rounded-full text-xs font-semibold mb-6">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    OPEN FOR PROJECTS & INTERNSHIPS
+                </div>
 
-                <p class="text-gray-400 leading-relaxed my-4">
-                    Software Engineer focused on building resilient, enterprise-grade systems. I turn complex requirements into clean, maintainable code designed for security and scalability.
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
+                    Architecting <span class="gradient-text">Scalable</span> Backends with Django & Python
+                </h1>
+
+                <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
+                    Full-Stack Software Engineer focused on building resilient, enterprise-grade systems. 
+                    I turn complex requirements into clean, maintainable code designed for security and scalability.
                 </p>
+
+                <div class="flex flex-wrap gap-4">
+                    <a href="/HTML/projects.html" class="inline-flex items-center gap-2 bg-blue-600 text-white font-semibold px-8 py-4 rounded-xl hover:bg-blue-700 hover:-translate-y-0.5 transition-all duration-300 shadow-xl shadow-blue-500/25">
+                        View Projects
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                    <a href="/HTML/contact.html" class="inline-flex items-center gap-2 bg-white text-slate-700 border border-slate-200 font-semibold px-8 py-4 rounded-xl hover:border-blue-300 hover:-translate-y-0.5 transition-all duration-300">
+                        Contact Me
+                    </a>
+                </div>
+
+                <div class="flex items-center gap-6 mt-10 text-sm text-slate-500">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        Assin Foso, Ghana
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        1+ Years Experience
+                    </div>
+                </div>
             </div>
-            <div class="flex gap-2">
-                <a href="/HTML/projects.html" class="bg-blue-800 px-6 py-4 text-white font-black hover:-translate-y-1 transition-all duration-500 rounded-lg">
-                    View Projects
-                </a>
-                <a href="/HTML/contact.html" class="bg-white border border-gray-300 text-gray-800 hover:-translate-y-1 transition-all duration-500 px-6 py-4 rounded-lg">
-                    Contact Me
-                </a>
+
+            <div class="reveal stagger-2">
+                <div class="code-window animate-float">
+                    <div class="flex items-center gap-2 px-4 py-3 border-b border-slate-700/50">
+                        <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        <span class="ml-4 text-slate-400 text-xs font-mono">system_optimizer.py</span>
+                    </div>
+                    <div class="p-6 font-mono text-sm leading-relaxed">
+                        <div class="text-slate-400 mb-2"># Resilient Distributed System</div>
+                        <div><span class="text-purple-400">class</span> <span class="text-yellow-300">SystemOptimizer</span>:</div>
+                        <div class="pl-4"><span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(<span class="text-orange-300">self</span>, <span class="text-blue-300">node</span>):</div>
+                        <div class="pl-8"><span class="text-orange-300">self</span>.node = node</div>
+                        <div class="pl-8"><span class="text-orange-300">self</span>.status = <span class="text-green-400">"ACTIVE"</span></div>
+                        <div class="pl-8"><span class="text-orange-300">self</span>.latency = <span class="text-green-400">"24ms"</span></div>
+                        <div class="pl-4 mt-2"><span class="text-purple-400">def</span> <span class="text-blue-400">scale_cluster</span>(<span class="text-orange-300">self</span>):</div>
+                        <div class="pl-8"><span class="text-purple-400">return</span> [n <span class="text-purple-400">for</span> n <span class="text-purple-400">in</span> <span class="text-orange-300">self</span>.node <span class="text-purple-400">if</span> n.ready]</div>
+                        <div class="mt-4 flex gap-4">
+                            <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
+                                <div class="text-slate-400 text-xs">Uptime</div>
+                                <div class="text-green-400 font-bold">99.9%</div>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
+                                <div class="text-slate-400 text-xs">Auth</div>
+                                <div class="text-blue-400 font-bold">RBAC</div>
+                            </div>
+                            <div class="bg-slate-800/50 rounded-lg px-3 py-2 border border-slate-700/50">
+                                <div class="text-slate-400 text-xs">Scale</div>
+                                <div class="text-violet-400 font-bold">10x</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div class="w-full md:w-5/12 bg-linear-to-r from-blue-200/40 hover:-rotate-1 transition-all duration-500 to-violet-100/40 backdrop-blur-lg shadow-2xl p-4 rounded-2xl rotate-3">
-            <div class="w-full flex gap-2 items-start justify-between">
-                <div class="flex gap-2 w-fit h-fit">
-                    <span class="bg-red-500 w-2 h-2 rounded-full"></span>
-                    <span class="bg-yellow-500 w-2 h-2 rounded-full"></span>
-                    <span class="bg-green-500 w-2 h-2 rounded-full"></span>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-linear-to-r from-blue-500 to-violet-500 rounded-2xl opacity-20 blur-xl"></div>
+                        <img src="/assets/images/image.jpeg" alt="Johnston Kweku Abubakar - Full-Stack Software Engineer" class="relative w-full rounded-2xl object-cover aspect-square shadow-2xl">
+                        <div class="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 shadow-xl border border-slate-100">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-slate-900">1+</div>
+                                    <div class="text-xs text-slate-500 font-medium">Years Coding</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="reveal stagger-2">
+                    <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">About Me</h2>
+                    <h3 class="text-4xl font-bold text-slate-900 mb-6">Focused Engineering.<br>Deep Dive.</h3>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        My professional path is defined by intentional growth. I've dedicated my focus to mastering the complexities of distributed systems and backend architecture, building robust solutions from the ground up while specializing in high-performance environments.
+                    </p>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        As a self-taught engineer, I've invested thousands of hours into debugging complex logic, optimizing database performance, and refining architectural patterns. My approach is rooted in the belief that software should be as resilient as it is efficient.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="text-3xl font-bold text-slate-900 mb-1">System-First</div>
+                            <div class="text-sm text-slate-500">Architecture before implementation</div>
+                        </div>
+                        <div class="border-l-4 border-violet-500 pl-4">
+                            <div class="text-3xl font-bold text-slate-900 mb-1">Self-Taught</div>
+                            <div class="text-sm text-slate-500">Driven by curiosity and grit</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="py-20 px-6 bg-slate-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16 reveal">
+                <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">Engineering Philosophy</h2>
+                <h3 class="text-4xl font-bold text-slate-900 mb-4">Built for Scale, Designed for Humans</h3>
+                <p class="text-slate-600">A strategic approach to development: focusing on the long-term scalability and structural integrity of every system.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="reveal stagger-1 group bg-white rounded-2xl p-8 shadow-lg shadow-slate-200/50 border border-slate-100 hover:border-blue-200 hover:-translate-y-1 transition-all duration-500">
+                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-blue-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">System Design First</h4>
+                    <p class="text-slate-600 leading-relaxed">I map out the entire data flow and infrastructure before writing a single line of code. Scaling starts in the blueprints.</p>
+                </div>
+
+                <div class="reveal stagger-2 group bg-white rounded-2xl p-8 shadow-lg shadow-slate-200/50 border border-slate-100 hover:border-violet-200 hover:-translate-y-1 transition-all duration-500">
+                    <div class="w-14 h-14 bg-violet-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-violet-600 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-violet-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">User Flow Focus</h4>
+                    <p class="text-slate-600 leading-relaxed">Backend logic exists to serve the user experience. I prioritize seamless transitions and intuitive state management.</p>
+                </div>
+
+                <div class="reveal stagger-3 group bg-white rounded-2xl p-8 shadow-lg shadow-slate-200/50 border border-slate-100 hover:border-pink-200 hover:-translate-y-1 transition-all duration-500">
+                    <div class="w-14 h-14 bg-pink-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-pink-600 transition-colors duration-300">
+                        <svg class="w-7 h-7 text-pink-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold text-slate-900 mb-3">Built for Scalability</h4>
+                    <p class="text-slate-600 leading-relaxed">From RBAC to optimized AJAX calls, every decision is made with 10x growth in mind. Performance is not an afterthought.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="py-20 px-6 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 reveal">
                 <div>
-                    <h1 class="text-gray-500 font-mono text-sm">
-                        system_monitor.py
-                    </h3>
+                    <h2 class="text-blue-400 font-semibold text-sm uppercase tracking-wider mb-3">Technical Stack</h2>
+                    <h3 class="text-4xl font-bold">Engineered with Precision</h3>
+                </div>
+                <div class="flex gap-3 mt-4 md:mt-0">
+                    <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded-full text-xs font-mono border border-slate-700">v2.4.0 Stable</span>
+                    <span class="bg-slate-800 text-slate-300 px-3 py-1 rounded-full text-xs font-mono border border-slate-700">98% Test Coverage</span>
                 </div>
             </div>
-            <div class="w-10/12 h-4 rounded-sm my-2 bg-linear-to-r from-blue-200 to-violet-300"></div>
 
-            <div class="flex md:gap-3 justify-between">
-                <div class="rounded-lg bg-violet-100 text-mauve-500 text-xs border border-blue-300 shadow flex flex-col md:px-10 px-6 py-3">
-                    <p>Latency</p>
-                    <p class="text-sm">24ms</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 reveal stagger-1">
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-blue-500 hover:bg-slate-800 transition-all duration-300 group">
+                    <svg class="w-10 h-10 group-hover:scale-110 transition-transform" viewBox="0 0 32 32" fill="none"><path fill="#2f985c" d="M3.884 12.079v1.312l-0.098-0.018c-0.602-0.105-1.243-0.063-1.789 0.119-1.209 0.404-1.887 1.475-1.826 2.887 0.029 0.633 0.156 1.069 0.43 1.48 0.391 0.589 1.024 0.939 1.95 1.085 0.681 0.108 2.066 0.032 3.003-0.166l0.071-0.016v-7.991h-1.742v1.309zM3.76 14.755l0.124 0.032v2.784l-0.177 0.016c-0.689 0.066-1.143-0.050-1.433-0.37-0.227-0.248-0.343-0.602-0.343-1.037 0-0.771 0.367-1.293 1.013-1.441 0.187-0.042 0.625-0.034 0.816 0.016zM6.655 11.654v0.884h1.742l-0.005-0.879-0.008-0.876-0.863-0.008-0.866-0.005v0.884zM11.379 13.319c-0.615 0.045-1.259 0.203-1.8 0.441l-0.153 0.069v0.665c0 0.52 0.008 0.66 0.034 0.649 0.932-0.399 1.393-0.509 2.043-0.491 0.274 0.008 0.333 0.018 0.396 0.066 0.127 0.092 0.166 0.206 0.166 0.478 0 0.135-0.005 0.245-0.013 0.245-0.076 0-0.591 0.066-0.837 0.108-1.264 0.211-1.919 0.644-2.093 1.375-0.050 0.219-0.050 0.747 0 0.966 0.085 0.354 0.264 0.618 0.549 0.8 0.591 0.383 1.483 0.422 3.813 0.166l0.164-0.018v-1.982c0-1.090-0.013-2.090-0.026-2.222-0.079-0.742-0.433-1.114-1.206-1.261-0.216-0.040-0.789-0.069-1.037-0.053zM12.144 17.154v0.578l-0.23 0.034c-0.359 0.053-0.839 0.047-0.99-0.011-0.275-0.106-0.383-0.414-0.243-0.684 0.076-0.148 0.264-0.269 0.544-0.351 0.137-0.040 0.726-0.137 0.86-0.142l0.058-0.003v0.578zM16.815 13.322c-0.626 0.026-1.56 0.177-2.222 0.354l-0.1 0.026v5.223h1.742l0.005-2.053 0.008-2.050 0.185-0.050c0.132-0.034 0.285-0.050 0.541-0.053 0.322-0.003 0.37 0.003 0.496 0.061 0.171 0.076 0.28 0.198 0.34 0.377 0.042 0.127 0.047 0.303 0.055 1.953l0.008 1.816h1.715l-0.011-2.064c-0.008-1.855-0.013-2.085-0.053-2.235-0.079-0.298-0.198-0.499-0.414-0.718-0.338-0.34-0.792-0.517-1.486-0.575-0.322-0.026-0.414-0.029-0.81-0.011zM28.412 13.343c-1.016 0.185-1.744 0.794-2.05 1.723-0.145 0.435-0.185 0.744-0.169 1.296 0.011 0.33 0.029 0.53 0.066 0.692 0.216 0.921 0.789 1.567 1.644 1.858 0.731 0.251 1.739 0.209 2.404-0.1 0.85-0.39 1.37-1.156 1.496-2.196 0.148-1.203-0.251-2.291-1.032-2.829-0.34-0.235-0.612-0.346-1.058-0.433-0.306-0.061-1.003-0.066-1.301-0.011zM29.383 14.755c0.28 0.103 0.491 0.375 0.607 0.778 0.053 0.182 0.061 0.272 0.061 0.647 0 0.372-0.008 0.464-0.061 0.641-0.116 0.406-0.293 0.644-0.581 0.779-0.129 0.061-0.185 0.071-0.401 0.071-0.214 0-0.272-0.011-0.396-0.069-0.285-0.132-0.456-0.346-0.575-0.705-0.090-0.274-0.114-0.91-0.047-1.235 0.079-0.377 0.237-0.652 0.478-0.816 0.256-0.177 0.599-0.211 0.916-0.092zM23.453 13.346c-0.694 0.074-1.214 0.201-1.668 0.409-1.082 0.496-1.644 1.399-1.644 2.636 0 1.214 0.554 2.093 1.531 2.433 0.554 0.193 1.301 0.201 1.829 0.018 0.129-0.045 0.238-0.076 0.243-0.071 0.021 0.021-0.040 0.52-0.082 0.655-0.135 0.451-0.404 0.707-0.881 0.837-0.245 0.069-1.079 0.069-1.399 0-0.28-0.058-0.668-0.185-0.916-0.298l-0.193-0.087v1.599l0.311 0.095c0.528 0.161 0.974 0.23 1.544 0.23 1.301 0.003 2.227-0.398 2.771-1.198 0.243-0.359 0.399-0.815 0.473-1.396 0.037-0.296 0.045-3.346 0.011-4.053l-0.018-0.378 0.203 0.008 0.206 0.011 0.288-0.602c0.158-0.33 0.282-0.607 0.277-0.615-0.024-0.021-0.549-0.116-0.955-0.171-0.296-0.040-0.583-0.055-1.111-0.063-0.391-0.003-0.76-0.003-0.818 0.003zM23.714 15.13c0.008 0.238 0.021 0.86 0.029 1.385l0.016 0.955-0.1 0.027c-0.39 0.105-0.776 0.105-1.045 0.005-0.449-0.172-0.676-0.557-0.699-1.182-0.018-0.523 0.082-0.858 0.343-1.132 0.288-0.304 0.731-0.467 1.304-0.483l0.137-0.003 0.016 0.428zM6.655 15.447c0 2.99-0.037 3.381-0.362 4.014-0.203 0.396-0.578 0.726-1.14 1.008-0.143 0.071-0.187 0.103-0.158 0.119 0.021 0.013 0.383 0.185 0.802 0.383l0.765 0.362 0.161-0.082c1.024-0.53 1.488-1.272 1.621-2.602 0.018-0.174 0.037-1.264 0.045-2.752l0.016-2.46h-1.75v2.011z"></path></svg>
+                    <span class="font-semibold text-sm">Django</span>
                 </div>
-                <div class="rounded-lg bg-blue-100 text-gray-500 text-xs shadow flex flex-col items-center justify-center text-center md:px-10 px-6 py-3">
-                    <p>Uptime</p>
-                    <p class="text-sm">99.9%</p>
+
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-yellow-500 hover:bg-slate-800 transition-all duration-300 group">
+                    <svg class="w-10 h-10 group-hover:scale-110 transition-transform" viewBox="0 0 32 32" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.0164 2C10.8193 2 9.03825 3.72453 9.03825 5.85185V8.51852H15.9235V9.25926H5.97814C3.78107 9.25926 2 10.9838 2 13.1111L2 18.8889C2 21.0162 3.78107 22.7407 5.97814 22.7407H8.27322V19.4815C8.27322 17.3542 10.0543 15.6296 12.2514 15.6296H19.5956C21.4547 15.6296 22.9617 14.1704 22.9617 12.3704V5.85185C22.9617 3.72453 21.1807 2 18.9836 2H13.0164ZM12.0984 6.74074C12.8589 6.74074 13.4754 6.14378 13.4754 5.40741C13.4754 4.67103 12.8589 4.07407 12.0984 4.07407C11.3378 4.07407 10.7213 4.67103 10.7213 5.40741C10.7213 6.14378 11.3378 6.74074 12.0984 6.74074Z" fill="url(#paint0_linear_87_8204)"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M18.9834 30C21.1805 30 22.9616 28.2755 22.9616 26.1482V23.4815L16.0763 23.4815L16.0763 22.7408L26.0217 22.7408C28.2188 22.7408 29.9998 21.0162 29.9998 18.8889V13.1111C29.9998 10.9838 28.2188 9.25928 26.0217 9.25928L23.7266 9.25928V12.5185C23.7266 14.6459 21.9455 16.3704 19.7485 16.3704L12.4042 16.3704C10.5451 16.3704 9.03809 17.8296 9.03809 19.6296L9.03809 26.1482C9.03809 28.2755 10.8192 30 13.0162 30H18.9834ZM19.9015 25.2593C19.1409 25.2593 18.5244 25.8562 18.5244 26.5926C18.5244 27.329 19.1409 27.9259 19.9015 27.9259C20.662 27.9259 21.2785 27.329 21.2785 26.5926C21.2785 25.8562 20.662 25.2593 19.9015 25.2593Z" fill="url(#paint1_linear_87_8204)"></path><defs><linearGradient id="paint0_linear_87_8204" x1="12.4809" y1="2" x2="12.4809" y2="22.7407" gradientUnits="userSpaceOnUse"><stop stop-color="#327EBD"></stop><stop offset="1" stop-color="#1565A7"></stop></linearGradient><linearGradient id="paint1_linear_87_8204" x1="19.519" y1="9.25928" x2="19.519" y2="30" gradientUnits="userSpaceOnUse"><stop stop-color="#FFDA4B"></stop><stop offset="1" stop-color="#F9C600"></stop></linearGradient></defs></svg>
+                    <span class="font-semibold text-sm">Python</span>
                 </div>
-                <div class="rounded-lg bg-blue-100 text-gray-500 text-xs shadow flex flex-col items-center justify-center text-center md:px-10 px-6 py-3">
-                    <p>Auth</p>
-                    <p class="text-sm">24ms</p>
+
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-yellow-400 hover:bg-slate-800 transition-all duration-300 group">
+                    <svg class="w-10 h-10 group-hover:scale-110 transition-transform" viewBox="0 0 512 512" fill="none"><rect width="512" height="512" rx="15%" fill="#f7df1e"></rect><path d="M324 370c10 17 24 29 47 29c20 0 33-10 33 -24c0-16 -13 -22 -35 -32l-12-5c-35-15 -58 -33 -58 -72c0-36 27 -64 70 -64c31 0 53 11 68 39l-37 24c-8-15 -17 -21 -31 -21c-14 0-23 9 -23 21c0 14 9 20 30 29l12 5c41 18 64 35 64 76c0 43-34 67 -80 67c-45 0-74 -21 -88 -49zm-170 4c8 13 14 25 31 25c16 0 26-6 26 -30V203h48v164c0 50-29 72 -72 72c-39 0-61 -20 -72 -44z" fill="#1C274C"></path></svg>
+                    <span class="font-semibold text-sm">JavaScript</span>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300 group">
+                    <svg class="w-10 h-10 group-hover:scale-110 transition-transform" viewBox="0 0 32 32" fill="none"><path d="M9,13.7q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q11.1,10.9,9,13.7ZM2,22.1q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q4.1,19.3,2,22.1Z" style="fill:#44a8b3"></path></svg>
+                    <span class="font-semibold text-sm">Tailwind</span>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-orange-500 hover:bg-slate-800 transition-all duration-300 group">
+                    <svg class="w-10 h-10 group-hover:scale-110 transition-transform" viewBox="0 0 32 32" fill="none"><path d="M6 28L4 3H28L26 28L16 31L6 28Z" fill="#E44D26"></path><path d="M26 5H16V29.5L24 27L26 5Z" fill="#F16529"></path><path d="M9.5 17.5L8.5 8H24L23.5 11H11.5L12 14.5H23L22 24L16 26L10 24L9.5 19H12.5L13 21.5L16 22.5L19 21.5L19.5 17.5H9.5Z" fill="white"></path></svg>
+                    <span class="font-semibold text-sm">HTML5</span>
+                </div>
+
+                <div class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 flex flex-col items-center gap-3 hover:border-blue-400 hover:bg-slate-800 transition-all duration-300 group">
+                    <svg class="w-10 h-10 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                    <span class="font-semibold text-sm">PostgreSQL</span>
                 </div>
             </div>
-            <div class="bg-gray-900 rounded-lg h-fit my-3 text-violet-200 text-[10px] text-start p-4">
-                <pre class="text-wrap">
-class SystemOptimizer:
-    def __init__(self, node):
-        self.node = node
-        self.status = "ACTIVE"
-    
-    def scale_cluster(self):
-        return [n for n in self.node if n.ready]
-                </pre>
+
+            <div class="mt-12 grid md:grid-cols-2 gap-8 reveal stagger-2">
+                <div class="bg-slate-800/30 rounded-xl p-6 border border-slate-700">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-slate-300 font-medium">Django & Python</span>
+                        <span class="text-blue-400 font-mono text-sm">95%</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%"></div></div>
+                </div>
+                <div class="bg-slate-800/30 rounded-xl p-6 border border-slate-700">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-slate-300 font-medium">System Architecture</span>
+                        <span class="text-violet-400 font-mono text-sm">90%</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%"></div></div>
+                </div>
+                <div class="bg-slate-800/30 rounded-xl p-6 border border-slate-700">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-slate-300 font-medium">Tailwind CSS</span>
+                        <span class="text-cyan-400 font-mono text-sm">92%</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 92%"></div></div>
+                </div>
+                <div class="bg-slate-800/30 rounded-xl p-6 border border-slate-700">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-slate-300 font-medium">JavaScript (Vanilla)</span>
+                        <span class="text-yellow-400 font-mono text-sm">88%</span>
+                    </div>
+                    <div class="skill-bar"><div class="skill-bar-fill" style="width: 88%"></div></div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="w-full flex md:flex-row animate-reveal opacity-0 translate-y-12 flex-col justify-between md:px-10 mt-6 h-fit py-6 bg-linear-to-r from-sky-50 to-fuchsia-50 shadow-2xl">
-        <img src="/assets/images/image.jpeg" class=" md:w-6/12 w-11/12 mx-auto h-full mb-4 rounded-2xl object-cover aspect-square" alt="Johnston Kweku Abubakar - Full-Stack Software Engineer">
+    <!-- Featured Projects Preview -->
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="text-blue-600 font-semibold text-sm uppercase tracking-wider mb-3">Featured Work</h2>
+                    <h3 class="text-4xl font-bold text-slate-900">Selected Projects</h3>
+                </div>
+                <a href="/HTML/projects.html" class="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors mt-4 md:mt-0">
+                    View All Projects
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+            </div>
 
-        <div class="md:w-6/12 w-full flex flex-col px-6 text-start my-auto">
-            <h2 class="text-black text-3xl tracking-wider font-bold my-4">
-                Focused Engineering. Deep Dive.
-            </h2>
-            <p class="text-gray-400 leading-relaxed my-2 text-lg">
-                My professional path is defined by intentional growth. I’ve dedicated my focus to 
-                mastering the complexities of distributed systems and backend architecture, building 
-                robust solutions from the ground up while specializing in high-performance environments.
-            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="reveal stagger-1 group bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/0f172a/3b82f6?text=SyntaxAndStories" alt="SyntaxAndStories" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">FLAGSHIP</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">SyntaxAndStories</h4>
+                        <p class="text-slate-600 text-sm mb-4">Africa-focused developer blogging platform with a coin economy, reward system, and real-time chat.</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">WebSockets</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">PostgreSQL</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="https://syntaxandstories.dev" target="_blank" class="inline-flex items-center gap-1 text-blue-600 font-semibold text-sm hover:text-blue-700 transition-colors">
+                                Live App <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            </a>
+                            <a href="/HTML/sas-case-study.html" class="inline-flex items-center gap-1 text-violet-600 font-semibold text-sm hover:text-violet-700 transition-colors">
+                                Case Study <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-            <p class="text-gray-400 leading-relaxed text-lg`">
-                As a self-taught engineer, I've invested thousands of hours into debugging complex logic, 
-                optimizing database performance, and refining architectural patterns. My approach is rooted in the 
-                belief that software should be as resilient as it is efficient.
-            </p>
+                <div class="reveal stagger-2 group bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/1e1b4b/8b5cf6?text=PharmaFlow" alt="PharmaFlow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-violet-600 text-white text-xs font-bold px-3 py-1 rounded-full">RBAC</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">PharmaFlow</h4>
+                        <p class="text-slate-600 text-sm mb-4">RBAC inventory management system for pharmaceutical operations with expiry alerts and real-time stock tracking.</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">RBAC</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Inventory</span>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="w-full flex gap-3 mt-4">
-                <span class="flex flex-col gap-1">
-                    <p class="text-3xl text-gray-400 font-bold">01</p>
-                    <p class="text-sm text-gray-800">System-First</p>
-                    <p class="text-xs text-gray-800">Architecture before implementation</p>
-                </span>
-                <span class="flex flex-col gap-1">
-                    <p class="text-3xl text-gray-400 font-bold">02</p>
-                    <p class="text-sm text-gray-800">Self-Taught</p>
-                    <p class="text-sm text-gray-800">Driven by curiosity and grit</p>
-                </span>
+                <div class="reveal stagger-3 group bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1">
+                    <div class="relative overflow-hidden h-56">
+                        <img src="https://placehold.co/600x400/0c4a6e/0ea5e9?text=BizChat" alt="BizChat" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-linear-to-t from-slate-900/80 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-sky-600 text-white text-xs font-bold px-3 py-1 rounded-full">REAL-TIME</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="text-xl font-bold text-slate-900 mb-2">BizChat</h4>
+                        <p class="text-slate-600 text-sm mb-4">Business chat application with AJAX polling, secure email-based onboarding, and low-latency delivery.</p>
+                        <div class="flex gap-2 mb-4">
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Django</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">AJAX</span>
+                            <span class="bg-slate-100 text-slate-600 text-xs px-2 py-1 rounded-md font-mono">Real-time</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>  
+    </section>
 
-    <div id="approach" class="w-full animate-reveal opacity-0 translate-y-12 bg-white px-6 py-10">
-        <h2 class="w-full text-center text-3xl my-3 font-bold">
-            Engineering Philosophy
-        </h2>
-        <p class="text-sm text-gray-600 text-center w-9/12 mx-auto">
-            A strategic approach to development: focusing on the long-term scalability and structural integrity of every system.
-        </p>
-    </div>
-
-    <div class="w-full bg-white md:px-12 animate-reveal opacity-0 translate-y-12 justify-center items-center flex md:flex-row gap-3 py-10 flex-col">
-        <div class="w-80 bg-white hover:-translate-y-1 group text-center px-8 py-6 shadow-2xl border border-gray-300 rounded-2xl hover:border-violet-400 transition-all duration-500">
-            <div class="w-fit flex items-start rounded-lg p-2 group-hover:bg-violet-400 transition-all duration-500 bg-violet-100">
-                <svg class="w-8 stroke-2 group-hover:text-white h-8 stroke-violet-600 transition-all duration-500" fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M43.1,47c0.4-4.2,1.6-8.3,3.6-11.8c3.3-5.7,8.6-9,15.8-9.2 c1.2-3.5,4.6-6,8.5-6c5,0,9,4,9,9s-4,9-9,9c-3.9,0-7.2-2.5-8.5-6l0,0c-8.1,0.3-12.5,6.6-13.4,15h13.4c1.2-3.5,4.6-6,8.5-6 c5,0,9,4,9,9s-4,9-9,9c-3.9,0-7.3-2.5-8.5-6H49.1c0.7,9,4.9,15.1,13.4,15c1.2-3.5,4.6-6,8.5-6c5,0,9,4,9,9s-4,9-9,9 c-3.9,0-7.3-2.5-8.5-6c-7.4,0.1-12.8-3.3-16.1-9.1c-1.9-3.5-3-7.6-3.3-11.9h-5.6c-1.2,3.5-4.6,6-8.5,6c-5,0-9-4-9-9s4-9,9-9 c3.9,0,7.3,2.5,8.5,6H43.1z M71,32c1.7,0,3-1.3,3-3s-1.3-3-3-3s-3,1.3-3,3S69.3,32,71,32z M71,74c1.7,0,3-1.3,3-3s-1.3-3-3-3 s-3,1.3-3,3S69.3,74,71,74z M71,53c1.7,0,3-1.3,3-3s-1.3-3-3-3s-3,1.3-3,3S69.3,53,71,53z M29,53c1.7,0,3-1.3,3-3s-1.3-3-3-3 s-3,1.3-3,3S27.3,53,29,53z"></path> </g></svg>
-            </div>
-            <h3 class="text-gray-800 font-light tracking-normal">
-                System Design First
-            </h3>
-            <p class="text-gray-600 text-wrap my-4">
-                I map out the entire data flow and infrastructure before writing a single line of code. Scaling starts in the blueprints
-            </p>
-        </div>
-
-        <div class="w-80 bg-white hover:-translate-y-1 group text-center px-8 py-6 shadow-2xl border border-gray-300 rounded-2xl hover:border-violet-400 transition-all duration-500">
-            <div class="w-fit flex items-start rounded-lg p-2 group-hover:bg-violet-400 transition-all duration-500 bg-violet-100">
-                <svg class="w-8 stroke-2 h-8 group-hover:text-white stroke-violet-600 transition-all duration-500" fill="#3429b3" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 895.401 895.4" xml:space="preserve" stroke="#3429b3"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M328.177,875.4c0,11,9,20,20,20h295.599c11,0,20-9,20-20V829.6H328.177V875.4z"></path> <path d="M321.477,322.9l0.101-146.3c0-16.9,6.399-32.7,18.1-44.5c13-13,31.6-20.4,51.2-20.4c15.3,0,30,4.7,41.399,13.1 c13.801,10.2,22.4,25.6,24.2,43.2c0,0.4,7.9,76.7,15,145c49.7-29.2,83.2-83.2,83.2-145c0-92.8-75.2-168-168-168 c-92.8,0-168,75.2-168,168C218.577,237.6,260.977,297.4,321.477,322.9z"></path> <path d="M716.176,513.801c0-19.5-12.5-36.801-31.1-42.801c-55.5-18.1-167.5-54.2-184.601-57.6c-5.3-1-10.5-1.5-15.5-1.5 c-13.5,0-25.3,3.7-32.399,10h-0.101c0,0,0,0,0-0.1c-0.1-0.801-25.899-250.3-25.899-250.7c-2.101-20-18.7-29.5-35.801-29.5 c-19.399,0-39.399,12.2-39.3,34.9l-0.2,404.301c0,4.799-3.5,8.799-8.3,9.5c-0.1,0-0.1,0-0.2,0c-0.399,0.1-0.899,0.1-1.3,0.1 c-0.1,0-0.2,0-0.3,0c-13.6-0.4-44.3-0.801-74.2-44.1c-4-5.701-7.6-10.9-10.9-15.701c-10.4-14.9-24.3-21.299-37.4-21.299 c-23,0-43.7,19.898-38.7,49.6c7.2,43.299,54.6,144.199,148,238.799h335.6l33.899-57.299c12.101-20.301,18.5-43.5,18.5-67.201 L716.176,513.801z"></path> </g> </g> </g></svg>
-            </div>
-            <h3 class="text-gray-800 font-light tracking-normal">
-                User Flow Focus
-            </h3>
-            <p class="text-gray-600 text-wrap my-4">
-                Backend logic exists to serve the user experience. I prioritize seamless transitions and intuitive state management.
-            </p>
-        </div>
-
-        <div class="w-80 bg-white hover:-translate-y-1 group text-center px-8 py-6 shadow-2xl border border-gray-300 rounded-2xl hover:border-violet-400 transition-all duration-500">
-            <div class="w-fit flex items-start rounded-lg p-2 group-hover:bg-violet-400 transition-all duration-500 bg-violet-100">
-                <svg class="w-8 stroke-2 h-8 group-hover:text-white stroke-violet-600 transition-all duration-500" height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#283ac3" stroke="#283ac3"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#2142c4;} </style> <g> <path class="st0" d="M491.896,264.561c-19.448-45.944-51.883-84.992-92.734-112.589C358.311,124.367,308.96,108.214,256,108.214 c-35.29,0-69,7.169-99.633,20.129C110.4,147.786,71.351,180.23,43.75,221.076C16.154,261.899,0,311.287,0,364.214 c0,4.427,0.109,8.814,0.331,13.185h80.202v-26.371H37.775c1.512-25.395,7.338-49.589,16.766-71.895 c9.315-22.04,22.174-42.25,37.819-59.903l30.234,30.242l18.656-18.661l-30.214-30.218c7.186-6.363,14.766-12.307,22.746-17.677 c31.508-21.274,68.754-34.501,109.033-36.896v42.734h26.37v-42.766c25.423,1.524,49.617,7.338,71.92,16.774 c22.044,9.315,42.258,22.17,59.903,37.814l-30.234,30.234l18.632,18.661l30.238-30.218c6.371,7.186,12.279,14.766,17.69,22.75 c21.266,31.509,34.5,68.758,36.891,109.024h-42.738v26.371h80.162c0.242-4.371,0.35-8.758,0.35-13.185 C512.025,328.931,504.838,295.222,491.896,264.561z"></path> <path class="st0" d="M329.375,199.471c-1.415-0.621-3.169,0.073-4.133,1.653l-75.383,124.072c-18.915,2.96-33.4,19.291-33.4,39.033 c0,21.847,17.706,39.556,39.553,39.556c21.842,0,39.553-17.709,39.553-39.556c0-7.395-2.064-14.282-5.593-20.202l40.968-140.396 C331.46,201.859,330.791,200.093,329.375,199.471z M256.012,384.004c-10.924,0-19.778-8.847-19.778-19.774 c0-10.927,8.854-19.782,19.778-19.782c10.92,0,19.774,8.855,19.774,19.782C275.786,375.157,266.932,384.004,256.012,384.004z"></path> </g> </g></svg>
-            </div>
-            <h3 class="text-gray-800 font-light tracking-normal">
-                Built for Scalability
-            </h3>
-            <p class="text-gray-600 text-wrap my-4">
-                From RBAC to optimized AJAX calls, every decision is made with 10x growth in mind. Performance is not an afterthought.
-            </p>
-
-        </div>
-    </div>
-
-    <div class="w-full px-4 animate-reveal translate-y-12 bg-gray-800 inset-0 opacity-100 py-12">
-        <h2 class="text-blue-700 text-sm w-full text-start">
-            TECHNICAL STACK
-        </h2>
-        <div class="w-full flex flex-col md:flex-row items-center justify-between">
-            <p class="text-white text-3xl font-bold">
-                Engineered with precision
-            </p>
-            <div class="flex items-center text-[10px] gap-2 justify-between">
-                <p class="bg-gray-400 px-2 py-1 rounded-2xl text-white font-bold">
-                    v2.4.0 Stable
-                </p>
-                <p class="bg-gray-400 px-2 py-1 rounded-2xl text-white font-bold">
-                    98% Test Coverage
-                </p>
+    <!-- CTA Section -->
+    <section class="py-20 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-linear-to-r from-blue-600 to-violet-600"></div>
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
+        <div class="max-w-4xl mx-auto text-center relative z-10 reveal">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Build Something Resilient?</h2>
+            <p class="text-blue-100 text-lg mb-10 max-w-2xl mx-auto">I'm currently open for freelance projects, internships, and full-time opportunities. Let's discuss how I can contribute to your team.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/HTML/contact.html" class="inline-flex items-center gap-2 bg-white text-blue-600 font-bold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-xl">
+                    Start a Conversation
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </a>
+                <a href="/HTML/projects.html" class="inline-flex items-center gap-2 bg-transparent text-white border-2 border-white/30 font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all duration-300">
+                    Explore My Work
+                </a>
             </div>
         </div>
+    </section>
 
-        <div class="flex gap-6 items-center justify-center flex-wrap my-12">
-            <div class="px-14 py-8 flex flex-col items-center justify-center gap-2 bg-slate-800 shadow-2xl rounded-2xl border border-gray-100 hover:-translate-y-1 transition-all duration-500">
-                <svg class="w-10 h-10" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#2f985c" d="M3.884 12.079v1.312l-0.098-0.018c-0.602-0.105-1.243-0.063-1.789 0.119-1.209 0.404-1.887 1.475-1.826 2.887 0.029 0.633 0.156 1.069 0.43 1.48 0.391 0.589 1.024 0.939 1.95 1.085 0.681 0.108 2.066 0.032 3.003-0.166l0.071-0.016v-7.991h-1.742v1.309zM3.76 14.755l0.124 0.032v2.784l-0.177 0.016c-0.689 0.066-1.143-0.050-1.433-0.37-0.227-0.248-0.343-0.602-0.343-1.037 0-0.771 0.367-1.293 1.013-1.441 0.187-0.042 0.625-0.034 0.816 0.016zM6.655 11.654v0.884h1.742l-0.005-0.879-0.008-0.876-0.863-0.008-0.866-0.005v0.884zM11.379 13.319c-0.615 0.045-1.259 0.203-1.8 0.441l-0.153 0.069v0.665c0 0.52 0.008 0.66 0.034 0.649 0.932-0.399 1.393-0.509 2.043-0.491 0.274 0.008 0.333 0.018 0.396 0.066 0.127 0.092 0.166 0.206 0.166 0.478 0 0.135-0.005 0.245-0.013 0.245-0.076 0-0.591 0.066-0.837 0.108-1.264 0.211-1.919 0.644-2.093 1.375-0.050 0.219-0.050 0.747 0 0.966 0.085 0.354 0.264 0.618 0.549 0.8 0.591 0.383 1.483 0.422 3.813 0.166l0.164-0.018v-1.982c0-1.090-0.013-2.090-0.026-2.222-0.079-0.742-0.433-1.114-1.206-1.261-0.216-0.040-0.789-0.069-1.037-0.053zM12.144 17.154v0.578l-0.23 0.034c-0.359 0.053-0.839 0.047-0.99-0.011-0.275-0.106-0.383-0.414-0.243-0.684 0.076-0.148 0.264-0.269 0.544-0.351 0.137-0.040 0.726-0.137 0.86-0.142l0.058-0.003v0.578zM16.815 13.322c-0.626 0.026-1.56 0.177-2.222 0.354l-0.1 0.026v5.223h1.742l0.005-2.053 0.008-2.050 0.185-0.050c0.132-0.034 0.285-0.050 0.541-0.053 0.322-0.003 0.37 0.003 0.496 0.061 0.171 0.076 0.28 0.198 0.34 0.377 0.042 0.127 0.047 0.303 0.055 1.953l0.008 1.816h1.715l-0.011-2.064c-0.008-1.855-0.013-2.085-0.053-2.235-0.079-0.298-0.198-0.499-0.414-0.718-0.338-0.34-0.792-0.517-1.486-0.575-0.322-0.026-0.414-0.029-0.81-0.011zM28.412 13.343c-1.016 0.185-1.744 0.794-2.050 1.723-0.145 0.435-0.185 0.744-0.169 1.296 0.011 0.33 0.029 0.53 0.066 0.692 0.216 0.921 0.789 1.567 1.644 1.858 0.731 0.251 1.739 0.209 2.404-0.1 0.85-0.39 1.37-1.156 1.496-2.196 0.148-1.203-0.251-2.291-1.032-2.829-0.34-0.235-0.612-0.346-1.058-0.433-0.306-0.061-1.003-0.066-1.301-0.011zM29.383 14.755c0.28 0.103 0.491 0.375 0.607 0.778 0.053 0.182 0.061 0.272 0.061 0.647 0 0.372-0.008 0.464-0.061 0.641-0.116 0.406-0.293 0.644-0.581 0.779-0.129 0.061-0.185 0.071-0.401 0.071-0.214 0-0.272-0.011-0.396-0.069-0.285-0.132-0.456-0.346-0.575-0.705-0.090-0.274-0.114-0.91-0.047-1.235 0.079-0.377 0.237-0.652 0.478-0.816 0.256-0.177 0.599-0.211 0.916-0.092zM23.453 13.346c-0.694 0.074-1.214 0.201-1.668 0.409-1.082 0.496-1.644 1.399-1.644 2.636 0 1.214 0.554 2.093 1.531 2.433 0.554 0.193 1.301 0.201 1.829 0.018 0.129-0.045 0.238-0.076 0.243-0.071 0.021 0.021-0.040 0.52-0.082 0.655-0.135 0.451-0.404 0.707-0.881 0.837-0.245 0.069-1.079 0.069-1.399 0-0.28-0.058-0.668-0.185-0.916-0.298l-0.193-0.087v1.599l0.311 0.095c0.528 0.161 0.974 0.23 1.544 0.23 1.301 0.003 2.227-0.398 2.771-1.198 0.243-0.359 0.399-0.815 0.473-1.396 0.037-0.296 0.045-3.346 0.011-4.053l-0.018-0.378 0.203 0.008 0.206 0.011 0.288-0.602c0.158-0.33 0.282-0.607 0.277-0.615-0.024-0.021-0.549-0.116-0.955-0.171-0.296-0.040-0.583-0.055-1.111-0.063-0.391-0.003-0.76-0.003-0.818 0.003zM23.714 15.13c0.008 0.238 0.021 0.86 0.029 1.385l0.016 0.955-0.1 0.027c-0.39 0.105-0.776 0.105-1.045 0.005-0.449-0.172-0.676-0.557-0.699-1.182-0.018-0.523 0.082-0.858 0.343-1.132 0.288-0.304 0.731-0.467 1.304-0.483l0.137-0.003 0.016 0.428zM6.655 15.447c0 2.99-0.037 3.381-0.362 4.014-0.203 0.396-0.578 0.726-1.14 1.008-0.143 0.071-0.187 0.103-0.158 0.119 0.021 0.013 0.383 0.185 0.802 0.383l0.765 0.362 0.161-0.082c1.024-0.53 1.488-1.272 1.621-2.602 0.018-0.174 0.037-1.264 0.045-2.752l0.016-2.46h-1.75v2.011z"></path> </g></svg>
-                <p class="text-white font-bold">
-                    Django
-                </p>
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <a href="index.html" class="text-white font-mono font-bold text-xl tracking-tighter mb-4 inline-block">
+                    <span class="text-blue-500">[</span>JA<span class="text-blue-500">]</span>
+                </a>
+                <p class="text-slate-500 max-w-sm">Full-Stack Software Engineer crafting resilient, scalable systems with Django and Python. Based in Assin Foso, Ghana.</p>
             </div>
-            <div class="px-14 py-8 bg-slate-800 flex flex-col items-center justify-center gap-2 shadow-2xl rounded-2xl border border-gray-100 hover:-translate-y-1 transition-all duration-500">
-                <svg class="w-10 h-10" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0164 2C10.8193 2 9.03825 3.72453 9.03825 5.85185V8.51852H15.9235V9.25926H5.97814C3.78107 9.25926 2 10.9838 2 13.1111L2 18.8889C2 21.0162 3.78107 22.7407 5.97814 22.7407H8.27322V19.4815C8.27322 17.3542 10.0543 15.6296 12.2514 15.6296H19.5956C21.4547 15.6296 22.9617 14.1704 22.9617 12.3704V5.85185C22.9617 3.72453 21.1807 2 18.9836 2H13.0164ZM12.0984 6.74074C12.8589 6.74074 13.4754 6.14378 13.4754 5.40741C13.4754 4.67103 12.8589 4.07407 12.0984 4.07407C11.3378 4.07407 10.7213 4.67103 10.7213 5.40741C10.7213 6.14378 11.3378 6.74074 12.0984 6.74074Z" fill="url(#paint0_linear_87_8204)"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M18.9834 30C21.1805 30 22.9616 28.2755 22.9616 26.1482V23.4815L16.0763 23.4815L16.0763 22.7408L26.0217 22.7408C28.2188 22.7408 29.9998 21.0162 29.9998 18.8889V13.1111C29.9998 10.9838 28.2188 9.25928 26.0217 9.25928L23.7266 9.25928V12.5185C23.7266 14.6459 21.9455 16.3704 19.7485 16.3704L12.4042 16.3704C10.5451 16.3704 9.03809 17.8296 9.03809 19.6296L9.03809 26.1482C9.03809 28.2755 10.8192 30 13.0162 30H18.9834ZM19.9015 25.2593C19.1409 25.2593 18.5244 25.8562 18.5244 26.5926C18.5244 27.329 19.1409 27.9259 19.9015 27.9259C20.662 27.9259 21.2785 27.329 21.2785 26.5926C21.2785 25.8562 20.662 25.2593 19.9015 25.2593Z" fill="url(#paint1_linear_87_8204)"></path> <defs> <linearGradient id="paint0_linear_87_8204" x1="12.4809" y1="2" x2="12.4809" y2="22.7407" gradientUnits="userSpaceOnUse"> <stop stop-color="#327EBD"></stop> <stop offset="1" stop-color="#1565A7"></stop> </linearGradient> <linearGradient id="paint1_linear_87_8204" x1="19.519" y1="9.25928" x2="19.519" y2="30" gradientUnits="userSpaceOnUse"> <stop stop-color="#FFDA4B"></stop> <stop offset="1" stop-color="#F9C600"></stop> </linearGradient> </defs> </g></svg>
-                <p class="text-white font-bold">
-                    Python
-                </p>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="index.html" class="hover:text-blue-400 transition-colors">Home</a></li>
+                    <li><a href="/HTML/projects.html" class="hover:text-blue-400 transition-colors">Projects</a></li>
+                    <li><a href="/HTML/contact.html" class="hover:text-blue-400 transition-colors">Contact</a></li>
+                </ul>
             </div>
-            <div class="px-14 py-8 bg-slate-800 flex flex-col items-center justify-center shadow-2xl rounded-2xl border border-gray-100 hover:-translate-y-1 transition-all duration-500">
-                <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" aria-label="JavaScript" role="img" viewBox="0 0 512 512" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><rect width="512" height="512" rx="15%" fill="#f7df1e"></rect><path d="M324 370c10 17 24 29 47 29c20 0 33-10 33 -24c0-16 -13 -22 -35 -32l-12-5c-35-15 -58 -33 -58 -72c0-36 27 -64 70 -64c31 0 53 11 68 39l-37 24c-8-15 -17 -21 -31 -21c-14 0-23 9 -23 21c0 14 9 20 30 29l12 5c41 18 64 35 64 76c0 43-34 67 -80 67c-45 0-74 -21 -88 -49zm-170 4c8 13 14 25 31 25c16 0 26-6 26 -30V203h48v164c0 50-29 72 -72 72c-39 0-61 -20 -72 -44z"></path></g></svg>
-                <p class="text-white font-bold">
-                    JavaScript
-                </p>
+            <div>
+                <h4 class="text-white font-semibold mb-4">Connect</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://github.com/johnston-kweku" target="_blank" class="hover:text-blue-400 transition-colors">GitHub</a></li>
+                    <li><a href="mailto:johnstonkweku@gmail.com" class="hover:text-blue-400 transition-colors">Email</a></li>
+                    <li><span class="text-slate-600">Assin Foso, Ghana</span></li>
+                </ul>
             </div>
-            <div class="px-14 py-8 bg-slate-800 flex flex-col items-center justify-center shadow-2xl rounded-2xl border border-gray-100 hover:-translate-y-1 transition-all duration-500">
-                <svg class="w-10 h-10" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><title>file_type_tailwind</title><path d="M9,13.7q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q11.1,10.9,9,13.7ZM2,22.1q1.4-5.6,7-5.6c5.6,0,6.3,4.2,9.1,4.9q2.8.7,4.9-2.1-1.4,5.6-7,5.6c-5.6,0-6.3-4.2-9.1-4.9Q4.1,19.3,2,22.1Z" style="fill:#44a8b3"></path></g></svg>
-                <p class="text-white font-bold">
-                    Tailwind
-                </p>
-            </div>
-            <div class="px-14 py-8 bg-slate-800 flex flex-col items-center justify-center shadow-2xl rounded-2xl border border-gray-100 hover:-translate-y-1 transition-all duration-500">
-                <svg class="w-10 h-10" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6 28L4 3H28L26 28L16 31L6 28Z" fill="#E44D26"></path> <path d="M26 5H16V29.5L24 27L26 5Z" fill="#F16529"></path> <path d="M9.5 17.5L8.5 8H24L23.5 11H11.5L12 14.5H23L22 24L16 26L10 24L9.5 19H12.5L13 21.5L16 22.5L19 21.5L19.5 17.5H9.5Z" fill="white"></path> </g></svg>
-                <p class="text-white font-bold">
-                    HTML5
-                </p>
-            </div>
-        </div>  
-    </div>
-    <script src="/assets/js/index.js"></script>
+        </div>
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-600">
+            <p> Johnston Kweku Abubakar. Crafted with Django, Python & Tailwind CSS.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bars = entry.target.querySelectorAll('.skill-bar-fill');
+                    bars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0';
+                        setTimeout(() => { bar.style.width = width; }, 100);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-bar').forEach(el => {
+            skillObserver.observe(el.parentElement.parentElement);
+        });
+    </script>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -284,8 +589,7 @@ class SystemOptimizer:
       },
       "jobTitle": "Full-Stack Software Engineer",
       "sameAs": [
-        "https://github.com/your-username",
-        "https://linkedin.com/in/your-username"
+        "https://github.com/johnston-kweku"
       ],
       "knowsAbout": [
         "Django",
@@ -300,6 +604,4 @@ class SystemOptimizer:
     }
     </script>
 </body>
-</html>l>/script>
-</body>
-</html>l>
+</html>
